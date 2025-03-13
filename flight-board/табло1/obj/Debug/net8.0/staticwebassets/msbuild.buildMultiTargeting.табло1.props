@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\табло1.props" />
+</Project>

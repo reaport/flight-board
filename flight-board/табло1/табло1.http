@@ -1,0 +1,6 @@
+@табло1_HostAddress = http://localhost:5230
+
+GET {{табло1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
