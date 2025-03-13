@@ -1,15 +1,14 @@
 ﻿namespace AirportManagement.Models
 {
+    public class AircraftData
+    {
+        public string AircraftId { get; set; }
+        public List<Seat> Seats { get; set; } // Список мест в самолете
+    }
+
     public class Seat
     {
-        /// <summary>
-        /// Номер места (например, "1A").
-        /// </summary>
         public string SeatNumber { get; set; }
-
-        /// <summary>
-        /// Класс места (например, "business" или "economy").
-        /// </summary>
         public string SeatClass { get; set; }
     }
 }

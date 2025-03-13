@@ -1,10 +1,13 @@
-﻿using AirportManagement.Models;
-
-public class FlightRegistrationResponse
+﻿namespace AirportManagement.Models
 {
-    public string FlightId { get; set; } // Например, "SU001"
-    public DateTime StartPlantingTime { get; set; } // RegistrationEndTime
-    public DateTime DepartureTime { get; set; }
-    public DateTime StartRegisterTime { get; set; } 
-    public List<SeatAvailability> SeatsAircraft { get; set; }
+    public class FlightRegistrationResponse
+    {
+        public string FlightId { get; set; }
+        public string FlightName { get; set; } // Добавлено свойство FlightName
+        public DateTime StartRegisterTime { get; set; }
+        public DateTime EndRegisterTime { get; set; } // Добавлено свойство EndRegisterTime
+        public DateTime StartPlantingTime { get; set; }
+        public DateTime DepartureTime { get; set; }
+        public List<Seat> SeatsAircraft { get; set; }
+    }
 }

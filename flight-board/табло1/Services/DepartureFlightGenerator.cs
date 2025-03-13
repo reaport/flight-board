@@ -3,6 +3,7 @@ using System.Timers;
 using AirportManagement.Services;
 using Microsoft.Extensions.Logging;
 using Timer = System.Timers.Timer;
+using AirportManagement.Models;
 
 namespace AirportManagement
 {
@@ -12,6 +13,8 @@ namespace AirportManagement
         private Timer _timer;
         private readonly ILogger<DepartureFlightGenerator> _logger;
         private readonly FlightSettings _settings;
+        private readonly IRegistrationService _registrationService; // Добавляем сервис
+        private readonly IAircraftService _aircraftService; // Добавляем AircraftService
 
         public string FlightId { get; }
         public string CityFrom { get; } = "Мосипск";
@@ -33,7 +36,7 @@ namespace AirportManagement
         private bool _hasLoggedBoardingClosed = false;
         private bool _hasLoggedDeparture = false;
 
-        public DepartureFlightGenerator(string destination, ILogger<DepartureFlightGenerator> logger, FlightSettings settings)
+        public DepartureFlightGenerator(string destination, ILogger<DepartureFlightGenerator> logger, FlightSettings settings, IRegistrationService registrationService, IAircraftService aircraftService)
         {
             if (string.IsNullOrEmpty(destination))
             {
@@ -41,10 +44,12 @@ namespace AirportManagement
             }
 
             _lastFlightNumber++;
-            FlightId = "SU" + _lastFlightNumber.ToString("D3");
+            FlightId = "KU" + _lastFlightNumber.ToString("D3");
             CityTo = destination; // Используем выбранный город
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+            _registrationService = registrationService ?? throw new ArgumentNullException(nameof(registrationService));
+            _aircraftService = aircraftService ?? throw new ArgumentNullException(nameof(aircraftService));
 
             InitializeFlightSchedule(DateTime.Now);
             _logger.LogInformation($"Рейс {FlightId} создан. Направление: {CityTo}. Время вылета: {DepartureTime}");
@@ -55,6 +60,7 @@ namespace AirportManagement
             _timer.Enabled = true;
 
             OpenTicketSales();
+            _aircraftService = aircraftService;
         }
 
         private void InitializeFlightSchedule(DateTime currentTime)
@@ -76,23 +82,9 @@ namespace AirportManagement
                                   $"Время вылета: {DepartureTime}");
         }
 
-        private void OnTimedEvent(object? sender, ElapsedEventArgs e)
+        private async void OnTimedEvent(object? sender, ElapsedEventArgs e)
         {
             DateTime currentTime = DateTime.Now;
-
-            // Продажа билетов
-            if (!IsTicketSalesClosed && currentTime >= TicketSalesStart && !_hasLoggedTicketSalesOpened)
-            {
-                _hasLoggedTicketSalesOpened = true;
-                IsTicketSalesClosed = false;
-                _logger.LogInformation($"Продажа билетов по рейсу {FlightId} открыта. Время начала: {TicketSalesStart}");
-            }
-
-            // Закрытие продажи билетов и открытие регистрации
-            if (!IsTicketSalesClosed && currentTime >= RegistrationStartTime)
-            {
-                CloseTicketSales();
-            }
 
             // Регистрация
             if (!IsRegistrationClosed && currentTime >= RegistrationStartTime && !_hasLoggedRegistrationOpened)
@@ -100,6 +92,38 @@ namespace AirportManagement
                 _hasLoggedRegistrationOpened = true;
                 IsRegistrationClosed = false;
                 _logger.LogInformation($"Регистрация по рейсу {FlightId} открыта. Время начала: {RegistrationStartTime}");
+
+                try
+                {
+                    // Получаем данные о самолете
+                    var aircraftData = await _aircraftService.GetAircraftDataAsync(AircraftId);
+
+                    // Преобразуем данные о самолете в список мест
+                    var seats = aircraftData.Seats.Select(s => new Seat
+                    {
+                        SeatNumber = s.SeatNumber,
+                        SeatClass = s.SeatClass
+                    }).ToList();
+
+                    // Формируем запрос для модуля регистрации
+                    var request = new FlightRegistrationResponse
+                    {
+                        FlightId = FlightId,
+                        FlightName = $"KU-{_lastFlightNumber}",
+                        EndRegisterTime = RegistrationEndTime,
+                        DepartureTime = DepartureTime,
+                        StartPlantingTime = BoardingStartTime,
+                        SeatsAircraft = seats
+                    };
+
+                    // Отправляем данные модулю регистрации
+                    await _registrationService.SendFlightRegistrationDataAsync(request); // Исправлено имя метода
+                    _logger.LogInformation($"Данные для рейса {FlightId} успешно отправлены модулю регистрации.");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Ошибка при отправке данных для рейса {FlightId}.");
+                }
             }
 
             // Закрытие регистрации и открытие посадки
@@ -131,6 +155,18 @@ namespace AirportManagement
                 _hasLoggedDeparture = true;
                 _logger.LogInformation($"Рейс {FlightId} вылетел в {CityTo}. Время вылета: {DepartureTime}");
             }
+        }
+
+        private List<Seat> GetSeats()
+        {
+            // Пример данных о местах
+            return new List<Seat>
+        {
+            new Seat { SeatNumber = "1A", SeatClass = "business" },
+            new Seat { SeatNumber = "1B", SeatClass = "business" },
+            new Seat { SeatNumber = "2A", SeatClass = "economy" },
+            new Seat { SeatNumber = "2B", SeatClass = "economy" }
+        };
         }
 
         public void CloseTicketSales()

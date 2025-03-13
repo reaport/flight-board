@@ -11,9 +11,9 @@ namespace AirportManagement.Controllers
     public class TicketDataController : ControllerBase
     {
         private readonly FlightService _flightService;
-        private readonly ILogger<TicketController> _logger;
+        private readonly ILogger<TicketsController> _logger;
 
-        public TicketDataController(FlightService flightService, ILogger<TicketController> logger)
+        public TicketDataController(FlightService flightService, ILogger<TicketsController> logger)
         {
             _flightService = flightService;
             _logger = logger;

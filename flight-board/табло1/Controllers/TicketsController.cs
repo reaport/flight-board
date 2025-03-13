@@ -4,88 +4,73 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AirportManagement.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TicketController : ControllerBase
+    public class TicketsController : ControllerBase
     {
         private readonly FlightService _flightService;
         private readonly IAircraftService _aircraftService;
-        private readonly ILogger<TicketController> _logger;
+        private readonly ILogger<TicketsController> _logger;
 
-        public TicketController(
+        public TicketsController(
             FlightService flightService,
             IAircraftService aircraftService,
-            ILogger<TicketController> logger)
+            ILogger<TicketsController> logger)
         {
             _flightService = flightService;
             _aircraftService = aircraftService;
             _logger = logger;
         }
 
-        [HttpGet("tickets")]
-        public async Task<ActionResult<TicketPurchaseResponse>> GetTicketPurchaseInfo(
-            [FromQuery] string flightId,
-            [FromQuery] string seatClass,
-            [FromQuery] string direction) // direction = CityTo
+        [HttpGet("available")]
+        public async Task<ActionResult<List<TicketPurchaseResponse>>> GetAvailableFlights()
         {
             try
             {
-                // Проверка входных данных
-                if (string.IsNullOrEmpty(flightId))
+                // Получение списка всех рейсов
+                var flights = _flightService.GetAllFlights();
+
+                var result = new List<TicketPurchaseResponse>();
+
+                foreach (var flight in flights)
                 {
-                    _logger.LogWarning("FlightId is required.");
-                    return BadRequest(new ErrorResponse { ErrorCode = 200, Message = "FlightId is required" });
+                    // Получение данных о самолете
+                    var aircraftData = await _aircraftService.GetAircraftDataAsync(flight.AircraftId);
+
+                    // Группировка мест по классам
+                    var availableSeatsByClass = aircraftData.Seats
+                        .GroupBy(s => s.SeatClass)
+                        .Select(g => new AvailableSeatsInfo // Используем AvailableSeatsInfo
+                        {
+                            SeatClass = g.Key,
+                            SeatCount = g.Count()
+                        })
+                        .ToList();
+
+                    // Формирование ответа для каждого рейса
+                    var flightInfo = new TicketPurchaseResponse
+                    {
+                        FlightId = flight.FlightId,
+                        CityFrom = flight.CityFrom,
+                        CityTo = flight.CityTo,
+                        TakeoffDateTime = flight.DepartureTime,
+                        AvailableSeats = availableSeatsByClass
+                    };
+
+                    result.Add(flightInfo);
                 }
 
-                if (string.IsNullOrEmpty(seatClass) || string.IsNullOrEmpty(direction))
-                {
-                    _logger.LogWarning("SeatClass and Direction are required.");
-                    return BadRequest(new ErrorResponse { ErrorCode = 202, Message = "SeatClass and Direction are required" });
-                }
-
-                // Получение информации о рейсе
-                var flight = _flightService.GetFlight(flightId);
-                if (flight == null)
-                {
-                    _logger.LogWarning($"Рейс {flightId} не найден.");
-                    return NotFound(new ErrorResponse { ErrorCode = 203, Message = "Flight not found" });
-                }
-
-                // Проверка, что рейс соответствует запросу
-                if (flight.CityTo != direction)
-                {
-                    _logger.LogWarning($"Рейс {flightId} не соответствует указанному направлению.");
-                    return BadRequest(new ErrorResponse { ErrorCode = 204, Message = "Flight does not match the specified direction" });
-                }
-
-                // Получение данных о самолете
-                var aircraftData = await _aircraftService.GetAircraftDataAsync(flight.AircraftId);
-
-                // Фильтрация доступных мест по классу
-                var availableSeats = aircraftData.Seats
-                    .Where(s => s.SeatClass == seatClass)
-                    .ToList();
-
-                // Формирование ответа
-                var response = new TicketPurchaseResponse
-                {
-                    FlightId = flightId,
-                    SeatClass = seatClass,
-                    Direction = direction,
-                    DepartureTime = flight.DepartureTime,
-                    AvailableSeats = availableSeats
-                };
-
-                _logger.LogInformation($"Информация о покупке билетов для рейса {flightId} успешно получена.");
-                return Ok(response);
+                _logger.LogInformation("Список доступных рейсов успешно получен.");
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Ошибка при получении информации о покупке билетов.");
+                _logger.LogError(ex, "Ошибка при получении списка доступных рейсов.");
                 return StatusCode(500, new ErrorResponse { ErrorCode = 500, Message = "InternalServerError" });
             }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7qo1JsZmhbLW4ei9WYsndkT9yzghd8OQRiolnYf+CVnh4yiLnpljrubsWEmXwS509OsO/OOqGkyKXbMBTl/3LA==",
+  "dgSpecHash": "50MrTiuvH+zYUm5QAh4YKvWbGnG++wyXh5EAdVsK3wAHF56t5FFoFyQzt0w7hVqEDZasCe0mu+DqEXi5zTS9+Q==",
   "success": true,
-  "projectFilePath": "C:\\рэу\\ррп\\табло1\\табло1\\табло1.csproj",
+  "projectFilePath": "C:\\рэу\\ррп\\аэропорт\\flight-board\\flight-board\\табло1\\табло1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elayzandra\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\elayzandra\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.0\\microsoft.extensions.configuration.abstractions.9.0.0.nupkg.sha512",

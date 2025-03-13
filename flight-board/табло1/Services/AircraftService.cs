@@ -2,7 +2,7 @@
 
 public interface IAircraftService
 {
-    Task<AircraftDepartureResponse> GetAircraftDataAsync(string aircraftId);
+    Task<AircraftData> GetAircraftDataAsync(string aircraftId);
 }
 
 public class AircraftService : IAircraftService
@@ -16,14 +16,14 @@ public class AircraftService : IAircraftService
         _logger = logger;
     }
 
-    public async Task<AircraftDepartureResponse> GetAircraftDataAsync(string aircraftId)
+    public async Task<AircraftData> GetAircraftDataAsync(string aircraftId)
     {
         try
         {
             var response = await _httpClient.GetAsync($"/api/aircraft/{aircraftId}");
             response.EnsureSuccessStatusCode();
 
-            var aircraftData = await response.Content.ReadFromJsonAsync<AircraftDepartureResponse>();
+            var aircraftData = await response.Content.ReadFromJsonAsync<AircraftData>();
             return aircraftData;
         }
         catch (Exception ex)

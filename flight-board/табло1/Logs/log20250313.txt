@@ -285,3 +285,542 @@ System.ArgumentException: Город отправления не найден в
 2025-03-13 16:20:25.286 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 81.4378ms
 2025-03-13 16:20:25.385 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
 2025-03-13 16:20:25.563 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 177.9455ms
+2025-03-13 18:36:23.037 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-13 18:36:23.126 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-13 18:36:23.133 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-13 18:36:23.135 +03:00 [INF] Hosting environment: Development
+2025-03-13 18:36:23.137 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-13 18:36:25.044 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-13 18:36:25.635 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 608.8045ms
+2025-03-13 18:36:25.645 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-13 18:36:25.647 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-13 18:36:25.671 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 23.3945ms
+2025-03-13 18:36:25.740 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 95.4848ms
+2025-03-13 18:36:25.806 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-13 18:36:26.005 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 199.1483ms
+2025-03-13 20:35:47.653 +03:00 [FTL] Приложение завершилось с ошибкой.
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: AirportManagement.Services.FlightService Lifetime: Singleton ImplementationType: AirportManagement.Services.FlightService': Unable to resolve service for type 'IRegistrationService' while attempting to activate 'AirportManagement.Services.FlightService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: AirportManagement.Services.FlightService Lifetime: Singleton ImplementationType: AirportManagement.Services.FlightService': Unable to resolve service for type 'IRegistrationService' while attempting to activate 'AirportManagement.Services.FlightService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'IRegistrationService' while attempting to activate 'AirportManagement.Services.FlightService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Program.cs:line 61
+2025-03-13 20:38:24.958 +03:00 [FTL] Приложение завершилось с ошибкой.
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: AirportManagement.Services.FlightService Lifetime: Singleton ImplementationType: AirportManagement.Services.FlightService': Cannot consume scoped service 'IAircraftService' from singleton 'AirportManagement.Services.FlightService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: AirportManagement.Services.FlightService Lifetime: Singleton ImplementationType: AirportManagement.Services.FlightService': Cannot consume scoped service 'IAircraftService' from singleton 'AirportManagement.Services.FlightService'.
+ ---> System.InvalidOperationException: Cannot consume scoped service 'IAircraftService' from singleton 'AirportManagement.Services.FlightService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitCallSite(ServiceCallSite callSite, CallSiteValidatorState argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitConstructor(ConstructorCallSite constructorCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitRootCache(ServiceCallSite singletonCallSite, CallSiteValidatorState state)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.VisitCallSite(ServiceCallSite callSite, CallSiteValidatorState argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.ValidateCallSite(ServiceCallSite callSite)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.OnCreate(ServiceCallSite callSite)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Program.cs:line 63
+2025-03-13 20:39:09.003 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-13 20:39:09.037 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-13 20:39:09.040 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-13 20:39:09.041 +03:00 [INF] Hosting environment: Development
+2025-03-13 20:39:09.042 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-13 20:39:09.618 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-13 20:39:09.881 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 269.6698ms
+2025-03-13 20:39:09.883 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-13 20:39:09.887 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-13 20:39:09.893 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 5.9583ms
+2025-03-13 20:39:09.936 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 52.7204ms
+2025-03-13 20:39:09.968 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-13 20:39:10.049 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 80.592ms
+2025-03-13 20:39:28.843 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/Flight/create - application/json 14
+2025-03-13 20:39:28.853 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-13 20:39:28.857 +03:00 [INF] CORS policy execution successful.
+2025-03-13 20:39:28.860 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 20:39:28.886 +03:00 [INF] Route matched with {action = "CreateDepartureFlight", controller = "Flight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Dto.FlightDto] CreateDepartureFlight(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-13 20:39:28.925 +03:00 [INF] Создание рейса с городом назначения: Москва
+2025-03-13 20:39:28.930 +03:00 [INF] Расписание рейса KU001 инициализировано: Начало продажи билетов: 13.03.2025 20:39:28, Начало регистрации: 13.03.2025 22:39:28, Закрытие регистрации: 13.03.2025 23:39:28, Начало посадки: 13.03.2025 23:39:28, Закрытие посадки: 14.03.2025 0:09:28, Время вылета: 14.03.2025 0:24:28
+2025-03-13 20:39:28.931 +03:00 [INF] Рейс KU001 создан. Направление: Москва. Время вылета: 14.03.2025 0:24:28
+2025-03-13 20:39:28.932 +03:00 [INF] Продажа билетов по рейсу KU001 открыта.
+2025-03-13 20:39:28.935 +03:00 [INF] Рейс успешно создан: {"FlightId":"KU001","CityFrom":"Мосипск","CityTo":"Москва","TicketSalesStart":"2025-03-13T20:39:28.9266462+03:00","RegistrationStartTime":"2025-03-13T22:39:28.9266462+03:00","RegistrationEndTime":"2025-03-13T23:39:28.9266462+03:00","BoardingStartTime":"2025-03-13T23:39:28.9266462+03:00","BoardingEndTime":"2025-03-14T00:09:28.9266462+03:00","DepartureTime":"2025-03-14T00:24:28.9266462+03:00","AircraftId":null,"IsTicketSalesClosed":false,"IsRegistrationClosed":false,"IsBoardingClosed":false,"$type":"DepartureFlightGenerator"}
+2025-03-13 20:39:28.951 +03:00 [INF] Executing OkObjectResult, writing value of type 'AirportManagement.Dto.FlightDto'.
+2025-03-13 20:39:28.964 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1) in 74.9468ms
+2025-03-13 20:39:28.966 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 20:39:28.967 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/Flight/create - 200 null application/json; charset=utf-8 123.6679ms
+2025-03-13 20:39:29.938 +03:00 [INF] Продажа билетов по рейсу KU001 открыта. Время начала: 13.03.2025 20:39:28
+2025-03-13 20:40:19.527 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Tickets/available - null null
+2025-03-13 20:40:19.543 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.TicketsController.GetAvailableFlights (табло1)'
+2025-03-13 20:40:19.551 +03:00 [INF] Route matched with {action = "GetAvailableFlights", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[AirportManagement.Models.TicketPurchaseResponse]]] GetAvailableFlights() on controller AirportManagement.Controllers.TicketsController (табло1).
+2025-03-13 20:40:19.609 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.InvalidOperationException: An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
+   at System.Net.Http.HttpClient.PrepareRequestMessage(HttpRequestMessage request)
+   at System.Net.Http.HttpClient.SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+2025-03-13 20:40:19.674 +03:00 [ERR] Ошибка при получении списка доступных рейсов.
+System.InvalidOperationException: An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
+   at System.Net.Http.HttpClient.PrepareRequestMessage(HttpRequestMessage request)
+   at System.Net.Http.HttpClient.SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+   at AirportManagement.Controllers.TicketsController.GetAvailableFlights() in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\TicketsController.cs:line 43
+2025-03-13 20:40:19.677 +03:00 [INF] Executing ObjectResult, writing value of type 'AirportManagement.Models.ErrorResponse'.
+2025-03-13 20:40:19.679 +03:00 [INF] Executed action AirportManagement.Controllers.TicketsController.GetAvailableFlights (табло1) in 126.9825ms
+2025-03-13 20:40:19.680 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.TicketsController.GetAvailableFlights (табло1)'
+2025-03-13 20:40:19.681 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Tickets/available - 500 null application/json; charset=utf-8 154.2839ms
+2025-03-13 20:48:18.364 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-13 20:48:18.409 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-13 20:48:18.413 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-13 20:48:18.414 +03:00 [INF] Hosting environment: Development
+2025-03-13 20:48:18.415 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-13 20:48:18.773 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-13 20:48:19.014 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 248.0005ms
+2025-03-13 20:48:19.017 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-13 20:48:19.020 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-13 20:48:19.026 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 5.66ms
+2025-03-13 20:48:19.053 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 36.4982ms
+2025-03-13 20:48:19.087 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-13 20:48:19.173 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 85.8709ms
+2025-03-13 20:48:34.642 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/AircraftData/aircraft-departure - application/json 272
+2025-03-13 20:48:34.653 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-13 20:48:34.656 +03:00 [INF] CORS policy execution successful.
+2025-03-13 20:48:34.658 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.AircraftDataController.SaveAircraftDepartureInfo (табло1)'
+2025-03-13 20:48:34.676 +03:00 [INF] Route matched with {action = "SaveAircraftDepartureInfo", controller = "AircraftData"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveAircraftDepartureInfo(AirportManagement.Models.AircraftDepartureSaveRequest) on controller AirportManagement.Controllers.AircraftDataController (табло1).
+2025-03-13 20:48:34.720 +03:00 [INF] Данные о вылетающем самолете string успешно сохранены.
+2025-03-13 20:48:34.725 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-03-13 20:48:34.738 +03:00 [INF] Executed action AirportManagement.Controllers.AircraftDataController.SaveAircraftDepartureInfo (табло1) in 59.4117ms
+2025-03-13 20:48:34.740 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.AircraftDataController.SaveAircraftDepartureInfo (табло1)'
+2025-03-13 20:48:34.740 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/AircraftData/aircraft-departure - 200 null application/json; charset=utf-8 98.1181ms
+2025-03-13 20:49:05.791 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/ArrivalFlight/create - application/json 57
+2025-03-13 20:49:05.800 +03:00 [INF] CORS policy execution successful.
+2025-03-13 20:49:05.801 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.ArrivalFlightController.CreateArrivalFlight (табло1)'
+2025-03-13 20:49:05.805 +03:00 [INF] Route matched with {action = "CreateArrivalFlight", controller = "ArrivalFlight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.ArrivalFlight] CreateArrivalFlight(AirportManagement.Controllers.ArrivalFlightSettings) on controller AirportManagement.Controllers.ArrivalFlightController (табло1).
+2025-03-13 20:49:05.846 +03:00 [ERR] Ошибка при создании рейса на прилет: Город отправления не найден в списке разрешенных городов. (Parameter 'departureCity')
+System.ArgumentException: Город отправления не найден в списке разрешенных городов. (Parameter 'departureCity')
+   at AirportManagement.ArrivalFlight..ctor(String departureCity, ILogger`1 logger, IConfiguration config, DateTime arrivalTime) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\ArrivalFlightGenerator.cs:line 45
+   at AirportManagement.Services.ArrivalFlightService.CreateArrivalFlight(String departureCity, Int32 arrivalTimeOffset) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\ArrivalFlightService.cs:line 28
+   at AirportManagement.Controllers.ArrivalFlightController.CreateArrivalFlight(ArrivalFlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\ArrivalFlightController.cs:line 39
+2025-03-13 20:49:05.884 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2025-03-13 20:49:05.885 +03:00 [INF] Executed action AirportManagement.Controllers.ArrivalFlightController.CreateArrivalFlight (табло1) in 78.882ms
+2025-03-13 20:49:05.887 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.ArrivalFlightController.CreateArrivalFlight (табло1)'
+2025-03-13 20:49:05.888 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/ArrivalFlight/create - 400 null text/plain; charset=utf-8 97.0308ms
+2025-03-13 20:49:20.856 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/ArrivalFlight/create - application/json 73
+2025-03-13 20:49:20.859 +03:00 [INF] CORS policy execution successful.
+2025-03-13 20:49:20.859 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.ArrivalFlightController.CreateArrivalFlight (табло1)'
+2025-03-13 20:49:20.861 +03:00 [INF] Route matched with {action = "CreateArrivalFlight", controller = "ArrivalFlight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.ArrivalFlight] CreateArrivalFlight(AirportManagement.Controllers.ArrivalFlightSettings) on controller AirportManagement.Controllers.ArrivalFlightController (табло1).
+2025-03-13 20:49:20.867 +03:00 [INF] Рейс на прилет SU002 создан. Отправление из: Новосибирск, Прилет в: Мосипск, Время прилета: 13.03.2025 20:49:20
+2025-03-13 20:49:20.868 +03:00 [INF] Создан новый рейс на прилет SU002 из Новосибирск.
+2025-03-13 20:49:20.869 +03:00 [INF] Текущее количество рейсов: 1
+2025-03-13 20:49:20.870 +03:00 [INF] Создан новый рейс на прилет SU002 из Новосибирск.
+2025-03-13 20:49:20.871 +03:00 [INF] Executing OkObjectResult, writing value of type 'AirportManagement.ArrivalFlight'.
+2025-03-13 20:49:20.875 +03:00 [INF] Executed action AirportManagement.Controllers.ArrivalFlightController.CreateArrivalFlight (табло1) in 12.8107ms
+2025-03-13 20:49:20.876 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.ArrivalFlightController.CreateArrivalFlight (табло1)'
+2025-03-13 20:49:20.877 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/ArrivalFlight/create - 200 null application/json; charset=utf-8 21.2677ms
+2025-03-13 20:49:21.870 +03:00 [INF] Рейс SU002 приземлился в Мосипск.
+2025-03-13 20:50:06.391 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/ArrivalFlight/SU001 - null null
+2025-03-13 20:50:06.402 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.ArrivalFlightController.GetArrivalFlightInfo (табло1)'
+2025-03-13 20:50:06.405 +03:00 [INF] Route matched with {action = "GetArrivalFlightInfo", controller = "ArrivalFlight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.ArrivalFlight] GetArrivalFlightInfo(System.String) on controller AirportManagement.Controllers.ArrivalFlightController (табло1).
+2025-03-13 20:50:06.408 +03:00 [WRN] Рейс на прилет SU001 не найден.
+2025-03-13 20:50:06.409 +03:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-03-13 20:50:06.423 +03:00 [INF] Executed action AirportManagement.Controllers.ArrivalFlightController.GetArrivalFlightInfo (табло1) in 16.0302ms
+2025-03-13 20:50:06.424 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.ArrivalFlightController.GetArrivalFlightInfo (табло1)'
+2025-03-13 20:50:06.425 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/ArrivalFlight/SU001 - 404 null application/problem+json; charset=utf-8 33.5477ms
+2025-03-13 20:55:40.128 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/City/allowed - null null
+2025-03-13 20:55:40.131 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.CityController.GetAllowedCities (табло1)'
+2025-03-13 20:55:40.133 +03:00 [INF] Route matched with {action = "GetAllowedCities", controller = "City"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllowedCities() on controller AirportManagement.Controllers.CityController (табло1).
+2025-03-13 20:55:40.135 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-03-13 20:55:40.137 +03:00 [INF] Executed action AirportManagement.Controllers.CityController.GetAllowedCities (табло1) in 2.4875ms
+2025-03-13 20:55:40.138 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.CityController.GetAllowedCities (табло1)'
+2025-03-13 20:55:40.139 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/City/allowed - 200 null application/json; charset=utf-8 10.3892ms
+2025-03-13 20:55:53.086 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/Flight/create - application/json 10
+2025-03-13 20:55:53.088 +03:00 [INF] CORS policy execution successful.
+2025-03-13 20:55:53.089 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 20:55:53.091 +03:00 [INF] Route matched with {action = "CreateDepartureFlight", controller = "Flight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Dto.FlightDto] CreateDepartureFlight(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-13 20:55:53.097 +03:00 [INF] Создание рейса с городом назначения: Сочи
+2025-03-13 20:55:53.100 +03:00 [INF] Расписание рейса KU001 инициализировано: Начало продажи билетов: 13.03.2025 20:55:53, Начало регистрации: 13.03.2025 22:55:53, Закрытие регистрации: 13.03.2025 23:55:53, Начало посадки: 13.03.2025 23:55:53, Закрытие посадки: 14.03.2025 0:25:53, Время вылета: 14.03.2025 0:40:53
+2025-03-13 20:55:53.101 +03:00 [INF] Рейс KU001 создан. Направление: Сочи. Время вылета: 14.03.2025 0:40:53
+2025-03-13 20:55:53.101 +03:00 [INF] Продажа билетов по рейсу KU001 открыта.
+2025-03-13 20:55:53.104 +03:00 [INF] Рейс успешно создан: {"FlightId":"KU001","CityFrom":"Мосипск","CityTo":"Сочи","TicketSalesStart":"2025-03-13T20:55:53.0993024+03:00","RegistrationStartTime":"2025-03-13T22:55:53.0993024+03:00","RegistrationEndTime":"2025-03-13T23:55:53.0993024+03:00","BoardingStartTime":"2025-03-13T23:55:53.0993024+03:00","BoardingEndTime":"2025-03-14T00:25:53.0993024+03:00","DepartureTime":"2025-03-14T00:40:53.0993024+03:00","AircraftId":null,"IsTicketSalesClosed":false,"IsRegistrationClosed":false,"IsBoardingClosed":false,"$type":"DepartureFlightGenerator"}
+2025-03-13 20:55:53.113 +03:00 [INF] Executing OkObjectResult, writing value of type 'AirportManagement.Dto.FlightDto'.
+2025-03-13 20:55:53.117 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1) in 23.6659ms
+2025-03-13 20:55:53.118 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 20:55:53.118 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/Flight/create - 200 null application/json; charset=utf-8 32.7621ms
+2025-03-13 20:55:54.112 +03:00 [INF] Продажа билетов по рейсу KU001 открыта. Время начала: 13.03.2025 20:55:53
+2025-03-13 20:56:19.353 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Flight/KU001/status - null null
+2025-03-13 20:56:19.355 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.GetFlightStatus (табло1)'
+2025-03-13 20:56:19.358 +03:00 [INF] Route matched with {action = "GetFlightStatus", controller = "Flight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] GetFlightStatus(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-13 20:56:19.360 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-03-13 20:56:19.361 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.GetFlightStatus (табло1) in 2.3662ms
+2025-03-13 20:56:19.362 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.GetFlightStatus (табло1)'
+2025-03-13 20:56:19.363 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Flight/KU001/status - 200 null text/plain; charset=utf-8 10.5255ms
+2025-03-13 20:56:27.024 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Flight/all - null null
+2025-03-13 20:56:27.027 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.GetAllFlights (табло1)'
+2025-03-13 20:56:27.028 +03:00 [INF] Route matched with {action = "GetAllFlights", controller = "Flight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[AirportManagement.Dto.FlightDto]] GetAllFlights() on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-13 20:56:27.031 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AirportManagement.Dto.FlightDto, табло1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-03-13 20:56:27.032 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.GetAllFlights (табло1) in 2.4379ms
+2025-03-13 20:56:27.033 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.GetAllFlights (табло1)'
+2025-03-13 20:56:27.034 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Flight/all - 200 null application/json; charset=utf-8 10.3309ms
+2025-03-13 20:56:58.674 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - application/json 186
+2025-03-13 20:56:58.681 +03:00 [INF] CORS policy execution successful.
+2025-03-13 20:56:58.681 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-13 20:56:58.683 +03:00 [INF] Route matched with {action = "SaveSettings", controller = "FlightSettings"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveSettings(FlightSettingsDto) on controller AirportManagement.Controllers.FlightSettingsController (табло1).
+2025-03-13 20:56:58.690 +03:00 [INF] Получены настройки: {"PurchaseToRegistrationMinutes":2,"RegistrationToBoardingMinutes":2,"BoardingToEndBoardingMinutes":1,"EndBoardingToDepartureMinutes":1,"Destination":"Москва","$type":"FlightSettingsDto"}
+2025-03-13 20:56:58.693 +03:00 [INF] Настройки обновлены: {"PurchaseToRegistrationMinutes":2,"RegistrationToBoardingMinutes":2,"BoardingToEndBoardingMinutes":1,"EndBoardingToDepartureMinutes":1,"$type":"FlightSettings"}
+2025-03-13 20:56:58.696 +03:00 [INF] Создание рейса с городом назначения: Москва
+2025-03-13 20:56:58.697 +03:00 [INF] Расписание рейса KU002 инициализировано: Начало продажи билетов: 13.03.2025 20:56:58, Начало регистрации: 13.03.2025 20:58:58, Закрытие регистрации: 13.03.2025 21:00:58, Начало посадки: 13.03.2025 21:00:58, Закрытие посадки: 13.03.2025 21:01:58, Время вылета: 13.03.2025 21:02:58
+2025-03-13 20:56:58.697 +03:00 [INF] Рейс KU002 создан. Направление: Москва. Время вылета: 13.03.2025 21:02:58
+2025-03-13 20:56:58.698 +03:00 [INF] Продажа билетов по рейсу KU002 открыта.
+2025-03-13 20:56:58.699 +03:00 [INF] Рейс успешно создан: {"FlightId":"KU002","CityFrom":"Мосипск","CityTo":"Москва","TicketSalesStart":"2025-03-13T20:56:58.6970472+03:00","RegistrationStartTime":"2025-03-13T20:58:58.6970472+03:00","RegistrationEndTime":"2025-03-13T21:00:58.6970472+03:00","BoardingStartTime":"2025-03-13T21:00:58.6970472+03:00","BoardingEndTime":"2025-03-13T21:01:58.6970472+03:00","DepartureTime":"2025-03-13T21:02:58.6970472+03:00","AircraftId":null,"IsTicketSalesClosed":false,"IsRegistrationClosed":false,"IsBoardingClosed":false,"$type":"DepartureFlightGenerator"}
+2025-03-13 20:56:58.705 +03:00 [INF] Рейс создан: {"FlightId":"KU002","CityFrom":"Мосипск","CityTo":"Москва","TicketSalesStart":"2025-03-13T20:56:58.6970472+03:00","RegistrationStartTime":"2025-03-13T20:58:58.6970472+03:00","RegistrationEndTime":"2025-03-13T21:00:58.6970472+03:00","BoardingStartTime":"2025-03-13T21:00:58.6970472+03:00","BoardingEndTime":"2025-03-13T21:01:58.6970472+03:00","DepartureTime":"2025-03-13T21:02:58.6970472+03:00","AircraftId":null,"IsTicketSalesClosed":false,"IsRegistrationClosed":false,"IsBoardingClosed":false,"$type":"DepartureFlightGenerator"}
+2025-03-13 20:56:58.712 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-03-13 20:56:58.714 +03:00 [INF] Executed action AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1) in 29.5617ms
+2025-03-13 20:56:58.715 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-13 20:56:58.716 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - 200 null application/json; charset=utf-8 42.1244ms
+2025-03-13 20:56:59.705 +03:00 [INF] Продажа билетов по рейсу KU002 открыта. Время начала: 13.03.2025 20:56:58
+2025-03-13 20:57:17.911 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/Flight/create - application/json 14
+2025-03-13 20:57:17.914 +03:00 [INF] CORS policy execution successful.
+2025-03-13 20:57:17.914 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 20:57:17.915 +03:00 [INF] Route matched with {action = "CreateDepartureFlight", controller = "Flight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Dto.FlightDto] CreateDepartureFlight(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-13 20:57:17.917 +03:00 [INF] Создание рейса с городом назначения: Москва
+2025-03-13 20:57:17.917 +03:00 [INF] Расписание рейса KU003 инициализировано: Начало продажи билетов: 13.03.2025 20:57:17, Начало регистрации: 13.03.2025 20:59:17, Закрытие регистрации: 13.03.2025 21:01:17, Начало посадки: 13.03.2025 21:01:17, Закрытие посадки: 13.03.2025 21:02:17, Время вылета: 13.03.2025 21:03:17
+2025-03-13 20:57:17.918 +03:00 [INF] Рейс KU003 создан. Направление: Москва. Время вылета: 13.03.2025 21:03:17
+2025-03-13 20:57:17.919 +03:00 [INF] Продажа билетов по рейсу KU003 открыта.
+2025-03-13 20:57:17.919 +03:00 [INF] Рейс успешно создан: {"FlightId":"KU003","CityFrom":"Мосипск","CityTo":"Москва","TicketSalesStart":"2025-03-13T20:57:17.9177081+03:00","RegistrationStartTime":"2025-03-13T20:59:17.9177081+03:00","RegistrationEndTime":"2025-03-13T21:01:17.9177081+03:00","BoardingStartTime":"2025-03-13T21:01:17.9177081+03:00","BoardingEndTime":"2025-03-13T21:02:17.9177081+03:00","DepartureTime":"2025-03-13T21:03:17.9177081+03:00","AircraftId":null,"IsTicketSalesClosed":false,"IsRegistrationClosed":false,"IsBoardingClosed":false,"$type":"DepartureFlightGenerator"}
+2025-03-13 20:57:17.926 +03:00 [INF] Executing OkObjectResult, writing value of type 'AirportManagement.Dto.FlightDto'.
+2025-03-13 20:57:17.927 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1) in 10.9869ms
+2025-03-13 20:57:17.928 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 20:57:17.929 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/Flight/create - 200 null application/json; charset=utf-8 18.0113ms
+2025-03-13 20:57:18.920 +03:00 [INF] Продажа билетов по рейсу KU003 открыта. Время начала: 13.03.2025 20:57:17
+2025-03-13 20:57:35.830 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Flight/KU003/status - null null
+2025-03-13 20:57:35.832 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.GetFlightStatus (табло1)'
+2025-03-13 20:57:35.833 +03:00 [INF] Route matched with {action = "GetFlightStatus", controller = "Flight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] GetFlightStatus(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-13 20:57:35.835 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-03-13 20:57:35.836 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.GetFlightStatus (табло1) in 1.4473ms
+2025-03-13 20:57:35.837 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.GetFlightStatus (табло1)'
+2025-03-13 20:57:35.838 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Flight/KU003/status - 200 null text/plain; charset=utf-8 8.2845ms
+2025-03-13 20:57:49.619 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/FlightSettings/get - null null
+2025-03-13 20:57:49.622 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightSettingsController.GetSettings (табло1)'
+2025-03-13 20:57:49.625 +03:00 [INF] Route matched with {action = "GetSettings", controller = "FlightSettings"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.FlightSettings] GetSettings() on controller AirportManagement.Controllers.FlightSettingsController (табло1).
+2025-03-13 20:57:49.626 +03:00 [INF] Запрошены текущие настройки.
+2025-03-13 20:57:49.627 +03:00 [INF] Executing OkObjectResult, writing value of type 'AirportManagement.FlightSettings'.
+2025-03-13 20:57:49.629 +03:00 [INF] Executed action AirportManagement.Controllers.FlightSettingsController.GetSettings (табло1) in 2.7217ms
+2025-03-13 20:57:49.630 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightSettingsController.GetSettings (табло1)'
+2025-03-13 20:57:49.631 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/FlightSettings/get - 200 null application/json; charset=utf-8 11.4606ms
+2025-03-13 20:57:56.455 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/FlightSettings/flights - null null
+2025-03-13 20:57:56.457 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightSettingsController.GetFlights (табло1)'
+2025-03-13 20:57:56.459 +03:00 [INF] Route matched with {action = "GetFlights", controller = "FlightSettings"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[AirportManagement.DepartureFlightGenerator]] GetFlights() on controller AirportManagement.Controllers.FlightSettingsController (табло1).
+2025-03-13 20:57:56.461 +03:00 [INF] Запрошен список рейсов. Количество рейсов: 3
+2025-03-13 20:57:56.463 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AirportManagement.DepartureFlightGenerator, табло1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-03-13 20:57:56.466 +03:00 [INF] Executed action AirportManagement.Controllers.FlightSettingsController.GetFlights (табло1) in 5.639ms
+2025-03-13 20:57:56.467 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightSettingsController.GetFlights (табло1)'
+2025-03-13 20:57:56.468 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/FlightSettings/flights - 200 null application/json; charset=utf-8 13.7592ms
+2025-03-13 20:58:24.713 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Registration/register?flightId=KU001&cityFrom=%D0%9C%D0%BE%D1%81%D0%B8%D0%BF%D1%81%D0%BA&cityTo=%D0%A1%D0%BE%D1%87%D0%B8 - null null
+2025-03-13 20:58:24.719 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1)'
+2025-03-13 20:58:24.725 +03:00 [INF] Route matched with {action = "GetRegistrationInfo", controller = "Registration"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Models.FlightRegistrationResponse]] GetRegistrationInfo(System.String, System.String, System.String) on controller AirportManagement.Controllers.RegistrationController (табло1).
+2025-03-13 20:58:24.741 +03:00 [INF] Start processing HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:58:24.744 +03:00 [INF] Sending HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:58:26.507 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+2025-03-13 20:58:26.555 +03:00 [ERR] Ошибка при получении информации о регистрации.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+   at AirportManagement.Controllers.RegistrationController.GetRegistrationInfo(String flightId, String cityFrom, String cityTo) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\RegistrationController.cs:line 62
+2025-03-13 20:58:26.562 +03:00 [INF] Executing ObjectResult, writing value of type 'AirportManagement.Models.ErrorResponse'.
+2025-03-13 20:58:26.564 +03:00 [INF] Executed action AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1) in 1837.4984ms
+2025-03-13 20:58:26.565 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1)'
+2025-03-13 20:58:26.567 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Registration/register?flightId=KU001&cityFrom=%D0%9C%D0%BE%D1%81%D0%B8%D0%BF%D1%81%D0%BA&cityTo=%D0%A1%D0%BE%D1%87%D0%B8 - 500 null application/json; charset=utf-8 1854.0331ms
+2025-03-13 20:58:58.700 +03:00 [INF] Закрытие продажи билетов для рейса KU002.
+2025-03-13 20:58:58.701 +03:00 [INF] Регистрация по рейсу KU002 открыта. Время начала: 13.03.2025 20:58:58
+2025-03-13 20:58:58.702 +03:00 [INF] Start processing HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:58:58.703 +03:00 [INF] Sending HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:58:58.840 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+2025-03-13 20:58:58.890 +03:00 [ERR] Ошибка при отправке данных для рейса KU002.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+   at AirportManagement.DepartureFlightGenerator.OnTimedEvent(Object sender, ElapsedEventArgs e) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\DepartureFlightGenerator.cs:line 113
+2025-03-13 20:59:14.119 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Registration/register?flightId=KU001&cityFrom=%D0%9C%D0%BE%D1%81%D0%B8%D0%BF%D1%81%D0%BA&cityTo=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0 - null null
+2025-03-13 20:59:14.121 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1)'
+2025-03-13 20:59:14.122 +03:00 [INF] Route matched with {action = "GetRegistrationInfo", controller = "Registration"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Models.FlightRegistrationResponse]] GetRegistrationInfo(System.String, System.String, System.String) on controller AirportManagement.Controllers.RegistrationController (табло1).
+2025-03-13 20:59:14.124 +03:00 [WRN] Рейс KU001 не соответствует указанным городам.
+2025-03-13 20:59:14.125 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'AirportManagement.Models.ErrorResponse'.
+2025-03-13 20:59:14.126 +03:00 [INF] Executed action AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1) in 3.4393ms
+2025-03-13 20:59:14.127 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1)'
+2025-03-13 20:59:14.128 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Registration/register?flightId=KU001&cityFrom=%D0%9C%D0%BE%D1%81%D0%B8%D0%BF%D1%81%D0%BA&cityTo=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0 - 400 null application/json; charset=utf-8 9.855ms
+2025-03-13 20:59:17.919 +03:00 [INF] Закрытие продажи билетов для рейса KU003.
+2025-03-13 20:59:17.920 +03:00 [INF] Регистрация по рейсу KU003 открыта. Время начала: 13.03.2025 20:59:17
+2025-03-13 20:59:17.921 +03:00 [INF] Start processing HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:59:17.922 +03:00 [INF] Sending HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:59:18.041 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+2025-03-13 20:59:18.083 +03:00 [ERR] Ошибка при отправке данных для рейса KU003.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+   at AirportManagement.DepartureFlightGenerator.OnTimedEvent(Object sender, ElapsedEventArgs e) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\DepartureFlightGenerator.cs:line 113
+2025-03-13 20:59:24.078 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Registration/register?flightId=KU002&cityFrom=%D0%9C%D0%BE%D1%81%D0%B8%D0%BF%D1%81%D0%BA&cityTo=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0 - null null
+2025-03-13 20:59:24.080 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1)'
+2025-03-13 20:59:24.081 +03:00 [INF] Route matched with {action = "GetRegistrationInfo", controller = "Registration"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Models.FlightRegistrationResponse]] GetRegistrationInfo(System.String, System.String, System.String) on controller AirportManagement.Controllers.RegistrationController (табло1).
+2025-03-13 20:59:24.083 +03:00 [INF] Start processing HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:59:24.084 +03:00 [INF] Sending HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 20:59:24.191 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+2025-03-13 20:59:24.237 +03:00 [ERR] Ошибка при получении информации о регистрации.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+   at AirportManagement.Controllers.RegistrationController.GetRegistrationInfo(String flightId, String cityFrom, String cityTo) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\RegistrationController.cs:line 62
+2025-03-13 20:59:24.242 +03:00 [INF] Executing ObjectResult, writing value of type 'AirportManagement.Models.ErrorResponse'.
+2025-03-13 20:59:24.244 +03:00 [INF] Executed action AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1) in 161.4251ms
+2025-03-13 20:59:24.244 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.RegistrationController.GetRegistrationInfo (табло1)'
+2025-03-13 20:59:24.245 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Registration/register?flightId=KU002&cityFrom=%D0%9C%D0%BE%D1%81%D0%B8%D0%BF%D1%81%D0%BA&cityTo=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0 - 500 null application/json; charset=utf-8 167.6992ms
+2025-03-13 21:00:04.043 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/TicketData/tickets - application/json 113
+2025-03-13 21:00:04.045 +03:00 [INF] CORS policy execution successful.
+2025-03-13 21:00:04.046 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.TicketDataController.SaveTicketPurchaseInfo (табло1)'
+2025-03-13 21:00:04.049 +03:00 [INF] Route matched with {action = "SaveTicketPurchaseInfo", controller = "TicketData"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveTicketPurchaseInfo(AirportManagement.Models.TicketPurchaseSaveRequest) on controller AirportManagement.Controllers.TicketDataController (табло1).
+2025-03-13 21:00:04.055 +03:00 [INF] Данные о покупке билетов успешно сохранены.
+2025-03-13 21:00:04.056 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-03-13 21:00:04.057 +03:00 [INF] Executed action AirportManagement.Controllers.TicketDataController.SaveTicketPurchaseInfo (табло1) in 6.0574ms
+2025-03-13 21:00:04.058 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.TicketDataController.SaveTicketPurchaseInfo (табло1)'
+2025-03-13 21:00:04.058 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/TicketData/tickets - 200 null application/json; charset=utf-8 15.5368ms
+2025-03-13 21:00:11.101 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/api/Tickets/available - null null
+2025-03-13 21:00:11.104 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.TicketsController.GetAvailableFlights (табло1)'
+2025-03-13 21:00:11.107 +03:00 [INF] Route matched with {action = "GetAvailableFlights", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[AirportManagement.Models.TicketPurchaseResponse]]] GetAvailableFlights() on controller AirportManagement.Controllers.TicketsController (табло1).
+2025-03-13 21:00:11.111 +03:00 [INF] Start processing HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 21:00:11.111 +03:00 [INF] Sending HTTP request GET https://aircraft.reaport.ru/api/aircraft/
+2025-03-13 21:00:18.237 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+2025-03-13 21:00:18.282 +03:00 [ERR] Ошибка при получении списка доступных рейсов.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 23
+   at AirportManagement.Controllers.TicketsController.GetAvailableFlights() in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\TicketsController.cs:line 43
+2025-03-13 21:00:18.287 +03:00 [INF] Executing ObjectResult, writing value of type 'AirportManagement.Models.ErrorResponse'.
+2025-03-13 21:00:18.288 +03:00 [INF] Executed action AirportManagement.Controllers.TicketsController.GetAvailableFlights (табло1) in 7179.177ms
+2025-03-13 21:00:18.289 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.TicketsController.GetAvailableFlights (табло1)'
+2025-03-13 21:00:18.290 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/api/Tickets/available - 500 null application/json; charset=utf-8 7188.9617ms
+2025-03-13 21:29:29.648 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-13 21:29:29.677 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-13 21:29:29.680 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-13 21:29:29.681 +03:00 [INF] Hosting environment: Development
+2025-03-13 21:29:29.682 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-13 21:29:30.297 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-13 21:29:30.534 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 246.2142ms
+2025-03-13 21:29:30.538 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-13 21:29:30.540 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-13 21:29:30.548 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 8.0311ms
+2025-03-13 21:29:30.576 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.0467ms
+2025-03-13 21:29:30.610 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-13 21:29:30.694 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 84.3063ms
+2025-03-13 21:30:14.975 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/Flight/create - application/json 10
+2025-03-13 21:30:14.990 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-13 21:30:14.992 +03:00 [INF] CORS policy execution successful.
+2025-03-13 21:30:14.995 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 21:30:15.013 +03:00 [INF] Route matched with {action = "CreateDepartureFlight", controller = "Flight"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Dto.FlightDto] CreateDepartureFlight(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-13 21:30:15.041 +03:00 [INF] Создание рейса с городом назначения: Сочи
+2025-03-13 21:30:15.046 +03:00 [INF] Расписание рейса KU001 инициализировано: Начало продажи билетов: 13.03.2025 21:30:15, Начало регистрации: 13.03.2025 23:30:15, Закрытие регистрации: 14.03.2025 0:30:15, Начало посадки: 14.03.2025 0:30:15, Закрытие посадки: 14.03.2025 1:00:15, Время вылета: 14.03.2025 1:15:15
+2025-03-13 21:30:15.047 +03:00 [INF] Рейс KU001 создан. Направление: Сочи. Время вылета: 14.03.2025 1:15:15
+2025-03-13 21:30:15.048 +03:00 [INF] Продажа билетов по рейсу KU001 открыта.
+2025-03-13 21:30:15.050 +03:00 [INF] Рейс успешно создан: {"FlightId":"KU001","CityFrom":"Мосипск","CityTo":"Сочи","TicketSalesStart":"2025-03-13T21:30:15.0427863+03:00","RegistrationStartTime":"2025-03-13T23:30:15.0427863+03:00","RegistrationEndTime":"2025-03-14T00:30:15.0427863+03:00","BoardingStartTime":"2025-03-14T00:30:15.0427863+03:00","BoardingEndTime":"2025-03-14T01:00:15.0427863+03:00","DepartureTime":"2025-03-14T01:15:15.0427863+03:00","AircraftId":null,"IsTicketSalesClosed":false,"IsRegistrationClosed":false,"IsBoardingClosed":false,"$type":"DepartureFlightGenerator"}
+2025-03-13 21:30:15.065 +03:00 [INF] Executing OkObjectResult, writing value of type 'AirportManagement.Dto.FlightDto'.
+2025-03-13 21:30:15.077 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1) in 60.0675ms
+2025-03-13 21:30:15.078 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-13 21:30:15.079 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/Flight/create - 200 null application/json; charset=utf-8 103.8036ms

@@ -25,7 +25,7 @@ namespace AirportManagement.Controllers
             [FromQuery] string flightId,
             [FromQuery] DateTime boardingStartTime,
             [FromQuery] DateTime boardingEndTime,
-            [FromQuery] List<SeatAvailability> boughtSeats) // Изменено на SeatAvailability
+            [FromQuery] List<AvailableSeatsInfo> boughtSeats) // Изменено на AvailableSeatsInfo
         {
             try
             {

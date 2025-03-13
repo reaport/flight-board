@@ -1,6 +1,9 @@
 ﻿using AirportManagement.Models;
 using AirportManagement.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace AirportManagement.Controllers
 {
@@ -10,15 +13,18 @@ namespace AirportManagement.Controllers
     {
         private readonly FlightService _flightService;
         private readonly IAircraftService _aircraftService;
+        private readonly IRegistrationService _registrationService; // Добавлено поле
         private readonly ILogger<RegistrationController> _logger;
 
         public RegistrationController(
             FlightService flightService,
             IAircraftService aircraftService,
+            IRegistrationService registrationService, // Добавлен параметр
             ILogger<RegistrationController> logger)
         {
             _flightService = flightService;
             _aircraftService = aircraftService;
+            _registrationService = registrationService; // Инициализация поля
             _logger = logger;
         }
 
@@ -69,10 +75,23 @@ namespace AirportManagement.Controllers
                     StartPlantingTime = flight.RegistrationEndTime,
                     DepartureTime = flight.DepartureTime,
                     SeatsAircraft = aircraftData.Seats
-
                 };
 
-                _logger.LogInformation($"Информация о регистрации для рейса {flightId} успешно получена.");
+                // Формирование запроса для отправки в модуль регистрации
+                var registrationRequest = new FlightRegistrationResponse // Используем FlightRegistrationRequest
+                {
+                    FlightId = flight.FlightId,
+                    FlightName = $"SU-{flight.FlightId}", // Пример формирования имени рейса
+                    EndRegisterTime = flight.RegistrationEndTime,
+                    DepartureTime = flight.DepartureTime,
+                    StartPlantingTime = flight.RegistrationEndTime, // Используем RegistrationEndTime как StartPlantingTime
+                    SeatsAircraft = aircraftData.Seats
+                };
+
+                // Отправка данных в модуль регистрации
+                await _registrationService.SendFlightRegistrationDataAsync(registrationRequest);
+
+                _logger.LogInformation($"Информация о регистрации для рейса {flightId} успешно получена и отправлена.");
                 return Ok(response);
             }
             catch (Exception ex)

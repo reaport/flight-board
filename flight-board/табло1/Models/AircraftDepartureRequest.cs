@@ -5,6 +5,6 @@
         public string FlightId { get; set; }
         public DateTime BoardingStartTime { get; set; }
         public DateTime BoardingEndTime { get; set; }
-        public List<SeatAvailability> BoughtSeats { get; set; }
+        public List<AvailableSeatsInfo> Seats { get; set; } // Исправлено на Seats
     }
 }
