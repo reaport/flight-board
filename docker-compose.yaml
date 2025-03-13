@@ -3,7 +3,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: docker/dockerfile
+      dockerfile: docker/Dockerfile
     restart: unless-stopped
   frontend:
     build:
