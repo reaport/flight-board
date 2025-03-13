@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/dockerfile
+    restart: unless-stopped
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/front.dockerfile
+    depends_on:
+      - backend
+    restart: unless-stopped
