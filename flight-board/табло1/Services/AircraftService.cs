@@ -4,6 +4,7 @@ using System.Text.Json;
 public interface IAircraftService
 {
     Task<AircraftData> GetAircraftDataAsync(string aircraftId);
+    Task<string> NotifyLandingAsync(string flightId);
 }
 
 public class AircraftService : IAircraftService
@@ -21,11 +22,20 @@ public class AircraftService : IAircraftService
     {
         try
         {
-            // Используем правильный URL: airplane.reaport.ru
-            var response = await _httpClient.GetAsync($"https://airplane.reaport.ru/generate");
+            // Выполняем POST-запрос к ручке /generate
+            var response = await _httpClient.PostAsync("/generate", null); // Если ручка POST
             response.EnsureSuccessStatusCode();
 
-            var aircraftData = await response.Content.ReadFromJsonAsync<AircraftData>();
+            // Десериализуем ответ
+            var aircraftGenerationResponse = await response.Content.ReadFromJsonAsync<AircraftGenerationResponse>();
+
+            // Преобразуем ответ в AircraftData
+            var aircraftData = new AircraftData
+            {
+                AircraftId = aircraftGenerationResponse.FlightId, // Используем FlightId из ответа
+                Seats = aircraftGenerationResponse.Seats // Используем список мест из ответа
+            };
+
             return aircraftData;
         }
         catch (Exception ex)
