@@ -56,11 +56,11 @@ try
     // Настройка CORS
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowAll", builder =>
+        options.AddPolicy("AllowAllOrigins", policy =>
         {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+            policy.AllowAnyOrigin() // Разрешаем запросы с любого источника
+                  .AllowAnyMethod() // Разрешаем все HTTP-методы (GET, POST, PUT и т.д.)
+                  .AllowAnyHeader(); // Разрешаем все заголовки
         });
     });
 
@@ -77,7 +77,7 @@ try
     app.UseAuthorization();
     app.MapControllers();
 
-    app.UseCors("AllowAll");
+    app.UseCors("AllowAllOrigins");
 
     app.Run();
 }
