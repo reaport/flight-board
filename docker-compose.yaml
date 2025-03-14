@@ -11,12 +11,13 @@ services:
       - traefik.http.routers.airport-flight-board-rhtea6-50-web.entrypoints=web
       - traefik.http.services.airport-flight-board-rhtea6-50-web.loadbalancer.server.port=8080
       - traefik.http.routers.airport-flight-board-rhtea6-50-web.service=airport-flight-board-rhtea6-50-web
-      - traefik.http.routers.airport-flight-board-rhtea6-50-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.airport-flight-board-rhtea6-50-web.middlewares=redirect-to-https@file,corsHeaders@file
       - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.rule=Host(`flight-board.reaport.ru`)
       - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.entrypoints=websecure
       - traefik.http.services.airport-flight-board-rhtea6-50-websecure.loadbalancer.server.port=8080
       - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.service=airport-flight-board-rhtea6-50-websecure
       - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.tls.certresolver=letsencrypt
+      - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.middlewares=redirect-to-https@file,corsHeaders@file
     networks:
       - dokploy-network
   frontend:
