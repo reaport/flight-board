@@ -1,0 +1,124 @@
+2025-03-14 21:49:21.697 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-14 21:49:21.738 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-14 21:49:21.741 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-14 21:49:21.742 +03:00 [INF] Hosting environment: Development
+2025-03-14 21:49:21.742 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-14 21:49:22.525 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-14 21:49:22.829 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 313.7095ms
+2025-03-14 21:49:22.829 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-14 21:49:22.835 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-14 21:49:22.848 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 12.4001ms
+2025-03-14 21:49:22.886 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 56.9673ms
+2025-03-14 21:49:22.914 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-14 21:49:22.997 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 82.9523ms
+2025-03-14 21:49:41.024 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/Flight/create - application/json 14
+2025-03-14 21:49:41.035 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-14 21:49:41.045 +03:00 [INF] CORS policy execution successful.
+2025-03-14 21:49:41.050 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-14 21:49:41.102 +03:00 [INF] Route matched with {action = "CreateDepartureFlight", controller = "Flight"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Dto.FlightDto]] CreateDepartureFlight(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-14 21:49:41.183 +03:00 [INF] Создание рейса с городом назначения: Москва
+2025-03-14 21:49:41.212 +03:00 [INF] Start processing HTTP request POST https://aircraft.reaport.ru/generate
+2025-03-14 21:49:41.215 +03:00 [INF] Sending HTTP request POST https://aircraft.reaport.ru/generate
+2025-03-14 21:49:42.944 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 25
+2025-03-14 21:49:43.085 +03:00 [ERR] Ошибка при создании рейса.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 25
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 48
+   at AirportManagement.Controllers.FlightController.CreateDepartureFlight(String destination) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\FlightController.cs:line 42
+2025-03-14 21:49:43.111 +03:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-03-14 21:49:43.116 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1) in 2001.7559ms
+2025-03-14 21:49:43.117 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-14 21:49:43.119 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/Flight/create - 500 null text/plain; charset=utf-8 2094.5199ms
+2025-03-14 21:49:59.924 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/Flight/create - application/json 10
+2025-03-14 21:49:59.930 +03:00 [INF] CORS policy execution successful.
+2025-03-14 21:49:59.931 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-14 21:49:59.932 +03:00 [INF] Route matched with {action = "CreateDepartureFlight", controller = "Flight"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AirportManagement.Dto.FlightDto]] CreateDepartureFlight(System.String) on controller AirportManagement.Controllers.FlightController (табло1).
+2025-03-14 21:49:59.935 +03:00 [INF] Создание рейса с городом назначения: Сочи
+2025-03-14 21:49:59.936 +03:00 [INF] Start processing HTTP request POST https://aircraft.reaport.ru/generate
+2025-03-14 21:49:59.937 +03:00 [INF] Sending HTTP request POST https://aircraft.reaport.ru/generate
+2025-03-14 21:50:00.026 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 25
+2025-03-14 21:50:00.096 +03:00 [ERR] Ошибка при создании рейса.
+System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+ ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure: RemoteCertificateNameMismatch, RemoteCertificateChainErrors
+   at System.Net.Security.SslStream.CompleteHandshake(SslAuthenticationOptions sslAuthenticationOptions)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|5_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 25
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 48
+   at AirportManagement.Controllers.FlightController.CreateDepartureFlight(String destination) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\FlightController.cs:line 42
+2025-03-14 21:50:00.101 +03:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-03-14 21:50:00.102 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1) in 168.2394ms
+2025-03-14 21:50:00.103 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
+2025-03-14 21:50:00.104 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/Flight/create - 500 null text/plain; charset=utf-8 180.0271ms

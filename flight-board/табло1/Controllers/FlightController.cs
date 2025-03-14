@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AirportManagement.Controllers
 {
@@ -30,7 +31,7 @@ namespace AirportManagement.Controllers
         }
 
         [HttpPost("create")]
-        public ActionResult<FlightDto> CreateDepartureFlight([FromBody] string destination)
+        public async Task<ActionResult<FlightDto>> CreateDepartureFlight([FromBody] string destination)
         {
             try
             {
@@ -38,7 +39,7 @@ namespace AirportManagement.Controllers
                 var departureFlightLogger = _loggerFactory.CreateLogger<DepartureFlightGenerator>();
 
                 // Создаем рейс (город назначения берется из аргумента или CityService)
-                var flight = _flightService.CreateFlight(destination, departureFlightLogger, _settings);
+                var flight = await _flightService.CreateFlightAsync(destination, departureFlightLogger, _settings);
 
                 // Преобразуем рейс в DTO
                 var flightDto = new FlightDto

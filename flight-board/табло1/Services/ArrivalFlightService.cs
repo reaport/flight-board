@@ -10,11 +10,16 @@ namespace AirportManagement.Services
         private readonly ConcurrentDictionary<string, ArrivalFlight> _arrivalFlights = new ConcurrentDictionary<string, ArrivalFlight>();
         private readonly IConfiguration _config;
         private readonly ILogger<ArrivalFlight> _logger;
+        private readonly AircraftModuleService _aircraftModuleService; // Добавляем AircraftModuleService
 
-        public ArrivalFlightService(IConfiguration config, ILogger<ArrivalFlight> logger)
+        public ArrivalFlightService(
+            IConfiguration config,
+            ILogger<ArrivalFlight> logger,
+            AircraftModuleService aircraftModuleService) // Добавляем AircraftModuleService
         {
             _config = config;
             _logger = logger;
+            _aircraftModuleService = aircraftModuleService;
         }
 
         public ArrivalFlight CreateArrivalFlight(string departureCity, int arrivalTimeOffset)
@@ -25,7 +30,13 @@ namespace AirportManagement.Services
             }
 
             DateTime arrivalTime = DateTime.Now.AddMinutes(arrivalTimeOffset);
-            var arrivalFlight = new ArrivalFlight(departureCity, _logger, _config, arrivalTime);
+            var arrivalFlight = new ArrivalFlight(
+                departureCity,
+                _logger,
+                _config,
+                arrivalTime,
+                _aircraftModuleService // Передаем AircraftModuleService
+            );
 
             if (!_arrivalFlights.TryAdd(arrivalFlight.FlightId, arrivalFlight))
             {

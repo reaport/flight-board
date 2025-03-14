@@ -1,6 +1,9 @@
-﻿using AirportManagement.Services;
+﻿using AirportManagement.Dto;
+using AirportManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AirportManagement.Controllers
 {
@@ -26,7 +29,7 @@ namespace AirportManagement.Controllers
         }
 
         [HttpPost("save")]
-        public IActionResult SaveSettings([FromBody] FlightSettingsDto newSettings)
+        public async Task<IActionResult> SaveSettings([FromBody] FlightSettingsDto newSettings)
         {
             if (newSettings == null)
             {
@@ -48,7 +51,7 @@ namespace AirportManagement.Controllers
 
             // Создаем новый рейс с выбранным городом
             var departureFlightLogger = _loggerFactory.CreateLogger<DepartureFlightGenerator>();
-            var flight = _flightService.CreateFlight(newSettings.Destination, departureFlightLogger, _settings);
+            var flight = await _flightService.CreateFlightAsync(newSettings.Destination, departureFlightLogger, _settings);
 
             // Логируем создание рейса
             _logger.LogInformation("Рейс создан: {@Flight}", flight);

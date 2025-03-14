@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
+using AirportManagement.Models;
 using AirportManagement.Services;
 using Microsoft.Extensions.Logging;
 using Timer = System.Timers.Timer;
-using AirportManagement.Models;
 
 namespace AirportManagement
 {
@@ -13,8 +15,10 @@ namespace AirportManagement
         private Timer _timer;
         private readonly ILogger<DepartureFlightGenerator> _logger;
         private readonly FlightSettings _settings;
-        private readonly IRegistrationService _registrationService; // Добавляем сервис
-        private readonly IAircraftService _aircraftService; // Добавляем AircraftService
+        private readonly IRegistrationService _registrationService;
+        private readonly IAircraftService _aircraftService;
+        private readonly OrchestratorService _orchestratorService; // Добавляем OrchestratorService
+        private readonly AircraftData _aircraftData; // Добавляем поле для данных о самолете
 
         public string FlightId { get; }
         public string CityFrom { get; } = "Мосипск";
@@ -25,7 +29,7 @@ namespace AirportManagement
         public DateTime BoardingStartTime { get; private set; }
         public DateTime BoardingEndTime { get; private set; }
         public DateTime DepartureTime { get; private set; }
-        public string AircraftId { get; set; } // Добавляем AircraftId
+        public string AircraftId { get; set; } // Идентификатор самолета
 
         public bool IsTicketSalesClosed { get; private set; }
         public bool IsRegistrationClosed { get; private set; }
@@ -36,7 +40,14 @@ namespace AirportManagement
         private bool _hasLoggedBoardingClosed = false;
         private bool _hasLoggedDeparture = false;
 
-        public DepartureFlightGenerator(string destination, ILogger<DepartureFlightGenerator> logger, FlightSettings settings, IRegistrationService registrationService, IAircraftService aircraftService)
+        public DepartureFlightGenerator(
+            string destination,
+            ILogger<DepartureFlightGenerator> logger,
+            FlightSettings settings,
+            IRegistrationService registrationService,
+            IAircraftService aircraftService,
+            OrchestratorService orchestratorService,
+            AircraftData aircraftData)
         {
             if (string.IsNullOrEmpty(destination))
             {
@@ -45,11 +56,12 @@ namespace AirportManagement
 
             _lastFlightNumber++;
             FlightId = "KU" + _lastFlightNumber.ToString("D3");
-            CityTo = destination; // Используем выбранный город
+            CityTo = destination;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _registrationService = registrationService ?? throw new ArgumentNullException(nameof(registrationService));
             _aircraftService = aircraftService ?? throw new ArgumentNullException(nameof(aircraftService));
+            _aircraftData = aircraftData ?? throw new ArgumentNullException(nameof(aircraftData)); // Инициализируем данные о самолете
 
             InitializeFlightSchedule(DateTime.Now);
             _logger.LogInformation($"Рейс {FlightId} создан. Направление: {CityTo}. Время вылета: {DepartureTime}");
@@ -60,7 +72,6 @@ namespace AirportManagement
             _timer.Enabled = true;
 
             OpenTicketSales();
-            _aircraftService = aircraftService;
         }
 
         private void InitializeFlightSchedule(DateTime currentTime)
@@ -117,7 +128,7 @@ namespace AirportManagement
                     };
 
                     // Отправляем данные модулю регистрации
-                    await _registrationService.SendFlightRegistrationDataAsync(request); // Исправлено имя метода
+                    await _registrationService.SendFlightRegistrationDataAsync(request);
                     _logger.LogInformation($"Данные для рейса {FlightId} успешно отправлены модулю регистрации.");
                 }
                 catch (Exception ex)
@@ -140,6 +151,25 @@ namespace AirportManagement
                 _logger.LogInformation($"Посадка по рейсу {FlightId} открыта. Время начала: {BoardingStartTime}");
             }
 
+            // Закрытие посадки и уведомление оркестратора
+            if (IsBoardingClosed && currentTime >= BoardingEndTime && !_hasLoggedBoardingClosed)
+            {
+                CloseBoarding();
+                _hasLoggedBoardingClosed = true;
+                _logger.LogInformation($"Посадка по рейсу {FlightId} закончена. Время окончания: {BoardingEndTime}");
+
+                try
+                {
+                    // Уведомляем оркестратора о завершении посадки
+                    await _orchestratorService.NotifyBoardingFinishedAsync(AircraftId);
+                    _logger.LogInformation($"Уведомление о завершении посадки для самолета {AircraftId} отправлено успешно.");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Ошибка при отправке уведомления о завершении посадки для самолета {AircraftId}.");
+                }
+            }
+
             // Закрытие посадки и подготовка ко взлету
             if (IsBoardingClosed && currentTime >= BoardingEndTime && !_hasLoggedBoardingClosed)
             {
@@ -155,18 +185,25 @@ namespace AirportManagement
                 _hasLoggedDeparture = true;
                 _logger.LogInformation($"Рейс {FlightId} вылетел в {CityTo}. Время вылета: {DepartureTime}");
             }
-        }
 
-        private List<Seat> GetSeats()
-        {
-            // Пример данных о местах
-            return new List<Seat>
-        {
-            new Seat { SeatNumber = "1A", SeatClass = "business" },
-            new Seat { SeatNumber = "1B", SeatClass = "business" },
-            new Seat { SeatNumber = "2A", SeatClass = "economy" },
-            new Seat { SeatNumber = "2B", SeatClass = "economy" }
-        };
+            // Вылет и уведомление оркестратора
+            if (IsBoardingClosed && currentTime >= DepartureTime && !_hasLoggedDeparture)
+            {
+                Depart();
+                _hasLoggedDeparture = true;
+                _logger.LogInformation($"Рейс {FlightId} вылетел в {CityTo}. Время вылета: {DepartureTime}");
+
+                try
+                {
+                    // Уведомляем оркестратора о взлете
+                    await _orchestratorService.NotifyTakeoffAsync(AircraftId);
+                    _logger.LogInformation($"Уведомление о взлете для самолета {AircraftId} отправлено успешно.");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Ошибка при отправке уведомления о взлете для самолета {AircraftId}.");
+                }
+            }
         }
 
         public void CloseTicketSales()

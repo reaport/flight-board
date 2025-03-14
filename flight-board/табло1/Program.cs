@@ -42,8 +42,10 @@ try
     builder.Services.AddHttpClient<IAircraftService, AircraftService>(client =>
     {
         client.BaseAddress = new Uri("https://aircraft.reaport.ru"); // Замените на реальный URL
-    }); builder.Services.AddHttpClient<IRegistrationService, RegistrationService>();
-
+    }); 
+    builder.Services.AddHttpClient<IRegistrationService, RegistrationService>();
+    builder.Services.AddHttpClient<OrchestratorService>();
+    builder.Services.AddHttpClient<AircraftModuleService>();
 
     builder.Services.AddSingleton<CityService>();
 

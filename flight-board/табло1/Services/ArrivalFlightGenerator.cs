@@ -4,6 +4,8 @@ using Timer = System.Timers.Timer;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using AirportManagement.Services;
 
 namespace AirportManagement
 {
@@ -13,6 +15,7 @@ namespace AirportManagement
         private Timer _timer;
         private readonly ILogger<ArrivalFlight> _logger;
         private readonly IConfiguration _config;
+        private readonly AircraftModuleService _aircraftModuleService; // Добавляем AircraftModuleService
 
         public string FlightId { get; } // Уникальный идентификатор рейса
         public string DepartureCity { get; } // Город отправления
@@ -20,7 +23,12 @@ namespace AirportManagement
         public DateTime ArrivalTime { get; set; } // Время прилета
         public bool HasLanded { get; private set; } // Флаг, указывающий, что самолет приземлился
 
-        public ArrivalFlight(string departureCity, ILogger<ArrivalFlight> logger, IConfiguration config, DateTime arrivalTime)
+        public ArrivalFlight(
+            string departureCity,
+            ILogger<ArrivalFlight> logger,
+            IConfiguration config,
+            DateTime arrivalTime,
+            AircraftModuleService aircraftModuleService) // Добавляем AircraftModuleService
         {
             if (string.IsNullOrEmpty(departureCity))
             {
@@ -35,6 +43,7 @@ namespace AirportManagement
             ArrivalTime = arrivalTime;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _config = config ?? throw new ArgumentNullException(nameof(config));
+            _aircraftModuleService = aircraftModuleService ?? throw new ArgumentNullException(nameof(aircraftModuleService));
 
             // Получаем список разрешенных городов из конфига
             var allowedOrigins = _config.GetSection("AllowedOrigins").Get<List<string>>();
@@ -54,22 +63,33 @@ namespace AirportManagement
             _timer.Enabled = true;
         }
 
-        private void OnTimedEvent(object? sender, ElapsedEventArgs e)
+        private async void OnTimedEvent(object? sender, ElapsedEventArgs e)
         {
             DateTime currentTime = DateTime.Now;
 
             // Проверяем, наступило ли время прилета
             if (!HasLanded && currentTime >= ArrivalTime)
             {
-                Land(); // Самолет приземляется
+                await LandAsync(); // Самолет приземляется
             }
         }
 
-        public void Land()
+        public async Task LandAsync()
         {
             HasLanded = true;
             _logger.LogInformation($"Рейс {FlightId} приземлился в {ArrivalCity}.");
             _timer.Stop(); // Останавливаем таймер
+
+            try
+            {
+                // Уведомляем модуль самолета о прилете
+                var aircraftId = await _aircraftModuleService.NotifyLandingAsync(FlightId);
+                _logger.LogInformation($"Уведомление о прилете для рейса {FlightId} отправлено успешно. ID самолета: {aircraftId}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Ошибка при отправке уведомления о прилете для рейса {FlightId}.");
+            }
         }
 
         public void Dispose()
