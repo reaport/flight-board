@@ -5,6 +5,20 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.airport-flight-board-rhtea6-50-web.rule=Host(`flight-board.reaport.ru`)
+      - traefik.http.routers.airport-flight-board-rhtea6-50-web.entrypoints=web
+      - traefik.http.services.airport-flight-board-rhtea6-50-web.loadbalancer.server.port=8080
+      - traefik.http.routers.airport-flight-board-rhtea6-50-web.service=airport-flight-board-rhtea6-50-web
+      - traefik.http.routers.airport-flight-board-rhtea6-50-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.rule=Host(`flight-board.reaport.ru`)
+      - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.entrypoints=websecure
+      - traefik.http.services.airport-flight-board-rhtea6-50-websecure.loadbalancer.server.port=8080
+      - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.service=airport-flight-board-rhtea6-50-websecure
+      - traefik.http.routers.airport-flight-board-rhtea6-50-websecure.tls.certresolver=letsencrypt
+    networks:
+      - dokploy-network
   frontend:
     build:
       context: .
@@ -12,3 +26,20 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.airport-flight-board-rhtea6-51-web.rule=Host(`flight-board.reaport.ru`) && PathPrefix(`/panel`)
+      - traefik.http.routers.airport-flight-board-rhtea6-51-web.entrypoints=web
+      - traefik.http.services.airport-flight-board-rhtea6-51-web.loadbalancer.server.port=80
+      - traefik.http.routers.airport-flight-board-rhtea6-51-web.service=airport-flight-board-rhtea6-51-web
+      - traefik.http.routers.airport-flight-board-rhtea6-51-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.airport-flight-board-rhtea6-51-websecure.rule=Host(`flight-board.reaport.ru`) && PathPrefix(`/panel`)
+      - traefik.http.routers.airport-flight-board-rhtea6-51-websecure.entrypoints=websecure
+      - traefik.http.services.airport-flight-board-rhtea6-51-websecure.loadbalancer.server.port=80
+      - traefik.http.routers.airport-flight-board-rhtea6-51-websecure.service=airport-flight-board-rhtea6-51-websecure
+      - traefik.http.routers.airport-flight-board-rhtea6-51-websecure.tls.certresolver=letsencrypt
+    networks:
+      - dokploy-network
+networks:
+  dokploy-network:
+    external: true
