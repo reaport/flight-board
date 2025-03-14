@@ -41,13 +41,13 @@ namespace AirportManagement
         private bool _hasLoggedDeparture = false;
 
         public DepartureFlightGenerator(
-            string destination,
-            ILogger<DepartureFlightGenerator> logger,
-            FlightSettings settings,
-            IRegistrationService registrationService,
-            IAircraftService aircraftService,
-            OrchestratorService orchestratorService,
-            AircraftData aircraftData)
+    string destination,
+    ILogger<DepartureFlightGenerator> logger,
+    FlightSettings settings,
+    IRegistrationService registrationService,
+    IAircraftService aircraftService,
+    OrchestratorService orchestratorService,
+    AircraftData aircraftData)
         {
             if (string.IsNullOrEmpty(destination))
             {
@@ -61,7 +61,8 @@ namespace AirportManagement
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _registrationService = registrationService ?? throw new ArgumentNullException(nameof(registrationService));
             _aircraftService = aircraftService ?? throw new ArgumentNullException(nameof(aircraftService));
-            _aircraftData = aircraftData ?? throw new ArgumentNullException(nameof(aircraftData)); // Инициализируем данные о самолете
+            _orchestratorService = orchestratorService ?? throw new ArgumentNullException(nameof(orchestratorService)); // Проверка на null
+            _aircraftData = aircraftData ?? throw new ArgumentNullException(nameof(aircraftData));
 
             InitializeFlightSchedule(DateTime.Now);
             _logger.LogInformation($"Рейс {FlightId} создан. Направление: {CityTo}. Время вылета: {DepartureTime}");

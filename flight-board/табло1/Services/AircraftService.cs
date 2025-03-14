@@ -4,7 +4,7 @@ using System.Text.Json;
 
 public interface IAircraftService
 {
-    Task<AircraftData> GetAircraftDataAsync(string aircraftId);
+    Task<AircraftData> GetAircraftDataAsync(string flightId); // Используем flightId вместо aircraftId
     Task<string> NotifyLandingAsync(string flightId);
 }
 
@@ -19,12 +19,12 @@ public class AircraftService : IAircraftService
         _logger = logger;
     }
 
-    public async Task<AircraftData> GetAircraftDataAsync(string aircraftId)
+    public async Task<AircraftData> GetAircraftDataAsync(string flightId)
     {
         try
         {
-            // Добавляем aircraftId в тело запроса
-            var requestBody = new { aircraftId = aircraftId };
+            // Создаем тело запроса с flightId
+            var requestBody = new { flightId = flightId };
             var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
 
             _logger.LogInformation("Отправка запроса на /generate с телом: {RequestBody}", JsonSerializer.Serialize(requestBody));

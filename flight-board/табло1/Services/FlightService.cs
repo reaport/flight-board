@@ -33,28 +33,25 @@ namespace AirportManagement.Services
         }
 
         public async Task<DepartureFlightGenerator> CreateFlightAsync(
-            string destination,
-            ILogger<DepartureFlightGenerator> logger,
-            FlightSettings settings)
+    string destination,
+    ILogger<DepartureFlightGenerator> logger,
+    FlightSettings settings)
         {
             if (string.IsNullOrEmpty(destination))
             {
                 throw new ArgumentException("Город назначения не может быть пустым.", nameof(destination));
             }
 
+            // Логируем создание рейса
             logger.LogInformation("Создание рейса с городом назначения: {Destination}", destination);
 
-            AircraftData aircraftData = null;
-            try
-            {
-                aircraftData = await _aircraftService.GetAircraftDataAsync("dummyId");
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Ошибка при получении данных о самолете.");
-                throw;
-            }
+            // Генерируем flightId (например, используем GUID)
+            var flightId = Guid.NewGuid().ToString();
 
+            // Получаем данные о самолете для указанного flightId
+            var aircraftData = await _aircraftService.GetAircraftDataAsync(flightId);
+
+            // Создаем рейс
             var flight = new DepartureFlightGenerator(
                 destination,
                 logger,
@@ -67,6 +64,7 @@ namespace AirportManagement.Services
 
             _flights.Add(flight);
 
+            // Логируем успешное создание рейса
             logger.LogInformation("Рейс успешно создан: {@Flight}", flight);
 
             return flight;
