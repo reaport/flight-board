@@ -1,11 +1,14 @@
-﻿namespace AirportManagement.Models
+﻿using System.Text.Json.Serialization;
+
+namespace AirportManagement.Models
 {
     public class TicketPurchaseResponse
     {
         public string FlightId { get; set; }
         public string CityFrom { get; set; }
         public string CityTo { get; set; }
-        public DateTime RegistrationStartTime { get; set; } // Добавляем время начала регистрации
+        [JsonPropertyName("startRegisterTime")] // Указываем имя поля в JSON
+        public DateTime RegistrationStartTime { get; set; }
         public DateTime TakeoffDateTime { get; set; }
         public List<AvailableSeatsInfo> AvailableSeats { get; set; }
     }

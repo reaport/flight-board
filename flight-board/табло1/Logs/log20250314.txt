@@ -191,3 +191,16 @@ System.Net.Http.HttpRequestException: The SSL connection could not be establishe
 2025-03-14 22:26:29.627 +03:00 [INF] Executed action AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1) in 1345.0156ms
 2025-03-14 22:26:29.629 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightController.CreateDepartureFlight (табло1)'
 2025-03-14 22:26:29.631 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/Flight/create - 500 null text/plain; charset=utf-8 1397.6925ms
+2025-03-14 22:31:58.733 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-14 22:31:58.778 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-14 22:31:58.784 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-14 22:31:58.786 +03:00 [INF] Hosting environment: Development
+2025-03-14 22:31:58.787 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-14 22:31:59.233 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-14 22:31:59.450 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 224.8886ms
+2025-03-14 22:31:59.453 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-14 22:31:59.456 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-14 22:31:59.466 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 9.392ms
+2025-03-14 22:31:59.490 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.2587ms
+2025-03-14 22:31:59.541 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-14 22:31:59.637 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 96.5935ms
