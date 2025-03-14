@@ -1,4 +1,5 @@
 ﻿using AirportManagement.Models;
+using System.Text;
 using System.Text.Json;
 
 public interface IAircraftService
@@ -22,12 +23,22 @@ public class AircraftService : IAircraftService
     {
         try
         {
+            // Добавляем aircraftId в тело запроса
+            var requestBody = new { aircraftId = aircraftId };
+            var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
+
+            _logger.LogInformation("Отправка запроса на /generate с телом: {RequestBody}", JsonSerializer.Serialize(requestBody));
+
             // Выполняем POST-запрос к ручке /generate
-            var response = await _httpClient.PostAsync("/generate", null); // Если ручка POST
+            var response = await _httpClient.PostAsync("/generate", content);
             response.EnsureSuccessStatusCode();
 
+            // Читаем и логируем ответ
+            var responseContent = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation("Ответ от /generate: {ResponseContent}", responseContent);
+
             // Десериализуем ответ
-            var aircraftGenerationResponse = await response.Content.ReadFromJsonAsync<AircraftGenerationResponse>();
+            var aircraftGenerationResponse = JsonSerializer.Deserialize<AircraftGenerationResponse>(responseContent);
 
             // Преобразуем ответ в AircraftData
             var aircraftData = new AircraftData
@@ -45,18 +56,24 @@ public class AircraftService : IAircraftService
         }
     }
 
-    // Метод для уведомления о прилете
     public async Task<string> NotifyLandingAsync(string flightId)
     {
         try
         {
+            // Добавляем flightId в тело запроса
+            var requestBody = new { flightId = flightId };
+            var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
+
             var url = $"/{flightId}/landing";
-            var response = await _httpClient.PostAsync(url, null);
+            var response = await _httpClient.PostAsync(url, content);
             response.EnsureSuccessStatusCode();
 
-            // Читаем ответ и возвращаем ID самолета
+            // Читаем ответ
             var responseContent = await response.Content.ReadAsStringAsync();
-            var aircraftId = JsonSerializer.Deserialize<Dictionary<string, string>>(responseContent)?["aircraft_id"];
+            var responseData = JsonSerializer.Deserialize<Dictionary<string, string>>(responseContent);
+
+            // Извлекаем aircraft_id
+            var aircraftId = responseData?["aircraft_id"];
 
             _logger.LogInformation($"Уведомление о прилете для рейса {flightId} отправлено успешно. ID самолета: {aircraftId}");
             return aircraftId;

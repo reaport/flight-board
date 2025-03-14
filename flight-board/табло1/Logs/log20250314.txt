@@ -243,3 +243,232 @@ System.Net.Http.HttpRequestException: The SSL connection could not be establishe
 2025-03-14 23:10:23.148 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.7877ms
 2025-03-14 23:10:23.175 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
 2025-03-14 23:10:23.276 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 101.0694ms
+2025-03-14 23:34:10.071 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-14 23:34:10.103 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-14 23:34:10.106 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-14 23:34:10.107 +03:00 [INF] Hosting environment: Development
+2025-03-14 23:34:10.107 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-14 23:34:10.393 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-14 23:34:10.608 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 222.0292ms
+2025-03-14 23:34:10.610 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-14 23:34:10.615 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-14 23:34:10.622 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 7.275ms
+2025-03-14 23:34:10.649 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 39.8867ms
+2025-03-14 23:34:10.676 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-14 23:34:10.759 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 82.5341ms
+2025-03-14 23:34:16.413 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - application/json 180
+2025-03-14 23:34:16.422 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-14 23:34:16.425 +03:00 [INF] CORS policy execution successful.
+2025-03-14 23:34:16.428 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:34:16.449 +03:00 [INF] Route matched with {action = "SaveSettings", controller = "FlightSettings"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SaveSettings(FlightSettingsDto) on controller AirportManagement.Controllers.FlightSettingsController (табло1).
+2025-03-14 23:34:16.492 +03:00 [INF] Получены настройки: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"Destination":"string","$type":"FlightSettingsDto"}
+2025-03-14 23:34:16.498 +03:00 [INF] Настройки обновлены: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"$type":"FlightSettings"}
+2025-03-14 23:34:16.501 +03:00 [INF] Создание рейса с городом назначения: string
+2025-03-14 23:34:16.516 +03:00 [INF] Start processing HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:34:16.519 +03:00 [INF] Sending HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:34:17.670 +03:00 [INF] Received HTTP response headers after 1148.4216ms - 422
+2025-03-14 23:34:17.671 +03:00 [INF] End processing HTTP request after 1158.9199ms - 422
+2025-03-14 23:34:17.715 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 27
+2025-03-14 23:34:17.826 +03:00 [INF] Executed action AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1) in 1373.302ms
+2025-03-14 23:34:17.829 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:34:17.833 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 27
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 50
+   at AirportManagement.Controllers.FlightSettingsController.SaveSettings(FlightSettingsDto newSettings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\FlightSettingsController.cs:line 54
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-03-14 23:34:17.844 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - 500 null text/plain; charset=utf-8 1431.3303ms
+2025-03-14 23:35:57.098 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-14 23:35:57.139 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-14 23:35:57.144 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-14 23:35:57.145 +03:00 [INF] Hosting environment: Development
+2025-03-14 23:35:57.146 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-14 23:35:57.294 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-14 23:35:57.542 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 257.6133ms
+2025-03-14 23:35:57.544 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-14 23:35:57.548 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-14 23:35:57.553 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 5.85ms
+2025-03-14 23:35:57.582 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.0886ms
+2025-03-14 23:35:57.614 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-14 23:35:57.701 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 86.5192ms
+2025-03-14 23:36:02.948 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - application/json 180
+2025-03-14 23:36:02.956 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-14 23:36:02.958 +03:00 [INF] CORS policy execution successful.
+2025-03-14 23:36:02.961 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:36:02.985 +03:00 [INF] Route matched with {action = "SaveSettings", controller = "FlightSettings"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SaveSettings(FlightSettingsDto) on controller AirportManagement.Controllers.FlightSettingsController (табло1).
+2025-03-14 23:36:03.030 +03:00 [INF] Получены настройки: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"Destination":"string","$type":"FlightSettingsDto"}
+2025-03-14 23:36:03.036 +03:00 [INF] Настройки обновлены: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"$type":"FlightSettings"}
+2025-03-14 23:36:03.039 +03:00 [INF] Создание рейса с городом назначения: string
+2025-03-14 23:36:03.051 +03:00 [INF] Start processing HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:36:03.054 +03:00 [INF] Sending HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:36:10.234 +03:00 [INF] Received HTTP response headers after 7177.1644ms - 422
+2025-03-14 23:36:10.236 +03:00 [INF] End processing HTTP request after 7189.2213ms - 422
+2025-03-14 23:36:10.276 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 27
+2025-03-14 23:36:10.349 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 27
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 50
+2025-03-14 23:36:10.393 +03:00 [INF] Executed action AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1) in 7403.9552ms
+2025-03-14 23:36:10.395 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:36:10.398 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 27
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 50
+   at AirportManagement.Controllers.FlightSettingsController.SaveSettings(FlightSettingsDto newSettings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\FlightSettingsController.cs:line 54
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-03-14 23:36:10.408 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - 500 null text/plain; charset=utf-8 7459.7065ms
+2025-03-14 23:38:51.817 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-14 23:38:51.902 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-14 23:38:51.912 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-14 23:38:51.914 +03:00 [INF] Hosting environment: Development
+2025-03-14 23:38:51.916 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-14 23:38:52.213 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-14 23:38:52.506 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 303.6408ms
+2025-03-14 23:38:52.515 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-14 23:38:52.516 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-14 23:38:52.530 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 14.5478ms
+2025-03-14 23:38:52.564 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 48.7456ms
+2025-03-14 23:38:52.601 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-14 23:38:52.696 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 95.1049ms
+2025-03-14 23:38:57.065 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - application/json 180
+2025-03-14 23:38:57.074 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-14 23:38:57.077 +03:00 [INF] CORS policy execution successful.
+2025-03-14 23:38:57.080 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:38:57.100 +03:00 [INF] Route matched with {action = "SaveSettings", controller = "FlightSettings"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SaveSettings(FlightSettingsDto) on controller AirportManagement.Controllers.FlightSettingsController (табло1).
+2025-03-14 23:38:57.141 +03:00 [INF] Получены настройки: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"Destination":"string","$type":"FlightSettingsDto"}
+2025-03-14 23:38:57.146 +03:00 [INF] Настройки обновлены: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"$type":"FlightSettings"}
+2025-03-14 23:38:57.148 +03:00 [INF] Создание рейса с городом назначения: string
+2025-03-14 23:38:57.156 +03:00 [INF] Отправка запроса на /generate с телом: {"aircraftId":"dummyId"}
+2025-03-14 23:38:57.160 +03:00 [INF] Start processing HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:38:57.163 +03:00 [INF] Sending HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:38:58.328 +03:00 [INF] Received HTTP response headers after 1162.1652ms - 422
+2025-03-14 23:38:58.330 +03:00 [INF] End processing HTTP request after 1172.7363ms - 422
+2025-03-14 23:38:58.366 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 34
+2025-03-14 23:38:58.440 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 34
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 50
+2025-03-14 23:38:58.486 +03:00 [INF] Executed action AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1) in 1381.5376ms
+2025-03-14 23:38:58.488 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:38:58.492 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 34
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 50
+   at AirportManagement.Controllers.FlightSettingsController.SaveSettings(FlightSettingsDto newSettings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\FlightSettingsController.cs:line 54
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-03-14 23:38:58.501 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - 500 null text/plain; charset=utf-8 1435.5472ms
+2025-03-14 23:41:21.878 +03:00 [INF] Now listening on: http://localhost:7136
+2025-03-14 23:41:21.913 +03:00 [INF] Now listening on: http://localhost:5230
+2025-03-14 23:41:21.917 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-14 23:41:21.918 +03:00 [INF] Hosting environment: Development
+2025-03-14 23:41:21.919 +03:00 [INF] Content root path: C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1
+2025-03-14 23:41:22.231 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/index.html - null null
+2025-03-14 23:41:22.436 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/index.html - 200 null text/html;charset=utf-8 211.9441ms
+2025-03-14 23:41:22.439 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_vs/browserLink - null null
+2025-03-14 23:41:22.440 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - null null
+2025-03-14 23:41:22.447 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_framework/aspnetcore-browser-refresh.js - 200 13758 application/javascript; charset=utf-8 6.7174ms
+2025-03-14 23:41:22.474 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/_vs/browserLink - 200 null text/javascript; charset=UTF-8 34.7572ms
+2025-03-14 23:41:22.514 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - null null
+2025-03-14 23:41:22.592 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:7136/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 78.3424ms
+2025-03-14 23:41:28.219 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - application/json 180
+2025-03-14 23:41:28.227 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-14 23:41:28.230 +03:00 [INF] CORS policy execution successful.
+2025-03-14 23:41:28.233 +03:00 [INF] Executing endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:41:28.255 +03:00 [INF] Route matched with {action = "SaveSettings", controller = "FlightSettings"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SaveSettings(FlightSettingsDto) on controller AirportManagement.Controllers.FlightSettingsController (табло1).
+2025-03-14 23:41:28.296 +03:00 [INF] Получены настройки: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"Destination":"string","$type":"FlightSettingsDto"}
+2025-03-14 23:41:28.301 +03:00 [INF] Настройки обновлены: {"PurchaseToRegistrationMinutes":0,"RegistrationToBoardingMinutes":0,"BoardingToEndBoardingMinutes":0,"EndBoardingToDepartureMinutes":0,"$type":"FlightSettings"}
+2025-03-14 23:41:28.305 +03:00 [INF] Создание рейса с городом назначения: string
+2025-03-14 23:41:28.313 +03:00 [INF] Отправка запроса на /generate с телом: {"aircraftId":"dummyId"}
+2025-03-14 23:41:28.318 +03:00 [INF] Start processing HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:41:28.321 +03:00 [INF] Sending HTTP request POST https://airplane.reaport.ru/generate
+2025-03-14 23:41:29.945 +03:00 [INF] Received HTTP response headers after 1621.2366ms - 422
+2025-03-14 23:41:29.948 +03:00 [INF] End processing HTTP request after 1633.0579ms - 422
+2025-03-14 23:41:29.984 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 34
+2025-03-14 23:41:30.056 +03:00 [ERR] Ошибка при получении данных о самолете.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 34
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 50
+2025-03-14 23:41:30.102 +03:00 [INF] Executed action AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1) in 1843.1154ms
+2025-03-14 23:41:30.104 +03:00 [INF] Executed endpoint 'AirportManagement.Controllers.FlightSettingsController.SaveSettings (табло1)'
+2025-03-14 23:41:30.107 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 422 (Unprocessable Entity).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at AircraftService.GetAircraftDataAsync(String aircraftId) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\AircraftService.cs:line 34
+   at AirportManagement.Services.FlightService.CreateFlightAsync(String destination, ILogger`1 logger, FlightSettings settings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Services\FlightService.cs:line 50
+   at AirportManagement.Controllers.FlightSettingsController.SaveSettings(FlightSettingsDto newSettings) in C:\рэу\ррп\аэропорт\flight-board\flight-board\табло1\Controllers\FlightSettingsController.cs:line 54
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-03-14 23:41:30.116 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:7136/api/FlightSettings/save - 500 null text/plain; charset=utf-8 1897.6871ms
