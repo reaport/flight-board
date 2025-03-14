@@ -5,6 +5,7 @@
         public string FlightId { get; set; }
         public string CityFrom { get; set; }
         public string CityTo { get; set; }
+        public DateTime RegistrationStartTime { get; set; }
         public DateTime DepartureTime { get; set; }
         public string AircraftId { get; set; }
     }

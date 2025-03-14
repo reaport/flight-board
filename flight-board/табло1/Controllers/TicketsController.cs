@@ -59,6 +59,7 @@ namespace AirportManagement.Controllers
                         CityFrom = flight.CityFrom,
                         CityTo = flight.CityTo,
                         TakeoffDateTime = flight.DepartureTime,
+                        RegistrationStartTime = flight.RegistrationStartTime, // Добавляем время начала регистрации
                         AvailableSeats = availableSeatsByClass
                     };
 
