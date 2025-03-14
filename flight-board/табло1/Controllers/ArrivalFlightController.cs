@@ -1,9 +1,10 @@
-﻿using AirportManagement.Services;
+﻿using AirportManagement.Models;
+using AirportManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AirportManagement.Controllers
 {
@@ -12,21 +13,24 @@ namespace AirportManagement.Controllers
     public class ArrivalFlightController : ControllerBase
     {
         private readonly ArrivalFlightService _arrivalFlightService;
-        private readonly ILogger<ArrivalFlightController> _logger; // Используем ILogger<ArrivalFlightController>
+        private readonly IAircraftService _aircraftService; // Добавляем AircraftService
+        private readonly ILogger<ArrivalFlightController> _logger;
         private readonly IConfiguration _config;
 
         public ArrivalFlightController(
             ArrivalFlightService arrivalFlightService,
-            ILogger<ArrivalFlightController> logger, // Исправляем тип логгера
+            IAircraftService aircraftService, // Внедряем AircraftService
+            ILogger<ArrivalFlightController> logger,
             IConfiguration config)
         {
             _arrivalFlightService = arrivalFlightService ?? throw new ArgumentNullException(nameof(arrivalFlightService));
+            _aircraftService = aircraftService ?? throw new ArgumentNullException(nameof(aircraftService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         [HttpPost("create")]
-        public ActionResult<ArrivalFlight> CreateArrivalFlight([FromBody] ArrivalFlightSettings settings)
+        public async Task<ActionResult<ArrivalFlight>> CreateArrivalFlight([FromBody] ArrivalFlightSettings settings)
         {
             if (settings == null)
             {
@@ -36,8 +40,16 @@ namespace AirportManagement.Controllers
 
             try
             {
+                // Создаем рейс на прилет
                 var arrivalFlight = _arrivalFlightService.CreateArrivalFlight(settings.DepartureCity, settings.ArrivalTimeOffset);
                 _logger.LogInformation($"Создан новый рейс на прилет {arrivalFlight.FlightId} из {settings.DepartureCity}.");
+
+                // Получаем данные о самолете
+                var aircraftData = await _aircraftService.GetAircraftDataAsync(arrivalFlight.FlightId);
+                arrivalFlight.AircraftData = aircraftData.AircraftId; // Добавляем данные о самолете в рейс
+
+                _logger.LogInformation($"Данные о самолете для рейса {arrivalFlight.FlightId} успешно получены.");
+
                 return Ok(arrivalFlight);
             }
             catch (ArgumentException ex)

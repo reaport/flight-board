@@ -18,6 +18,7 @@ namespace AirportManagement
         private readonly AircraftModuleService _aircraftModuleService; // Добавляем AircraftModuleService
 
         public string FlightId { get; } // Уникальный идентификатор рейса
+        public string AircraftData { get; set; }
         public string DepartureCity { get; } // Город отправления
         public string ArrivalCity { get; } = "Мосипск"; // Город прилета (всегда Мосипск)
         public DateTime ArrivalTime { get; set; } // Время прилета
