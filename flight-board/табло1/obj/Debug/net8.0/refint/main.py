@@ -220,20 +220,49 @@ def notify_registration_open(flight_id: str):
     try:
         # Преобразуем datetime объекты в строки ISO формата для JSON сериализации
         flight = flights_db[flight_id]
-        requests.post(f"{REGISTRATION_SERVICE_URL}/{flight_id}/flights", 
-            json={
-                "flightId": flight_id,
-                "flightName": flight_id,
-                "endRegisterTime": flight.registrationEndTime.isoformat(),
-                "departureTime": flight.departureTime.isoformat(),
-                "startPlantingTime": flight.boardingStartTime.isoformat(),
-                "seatsAircraft": [
-                    {"seatNumber": seat.seat_number, "seatClass": seat.seat_class.value}
-                    for seat in aircraft_data.get(flight_id, {}).seats
-                ] if flight_id in aircraft_data else []
-            })
+        
+        # Находим данные о самолете
+        aircraft_flight_id = flight_id
+        # Для рейса на вылет ищем соответствующий рейс на прилет
+        if flight.cityFrom == "Мосипск":  # Это рейс на вылет
+            for arrival_id, departure_id in arrival_departure_pairs.items():
+                if departure_id == flight_id:
+                    aircraft_flight_id = arrival_id
+                    break
+        
+        # Получаем места в самолете
+        seats_data = []
+        if aircraft_flight_id in aircraft_data and hasattr(aircraft_data[aircraft_flight_id], 'seats'):
+            for seat in aircraft_data[aircraft_flight_id].seats:
+                seats_data.append({
+                    "seatNumber": seat.seat_number,
+                    "seatClass": seat.seat_class.value
+                })
+        
+        # Формируем данные запроса с правильной сериализацией datetime
+        request_data = {
+            "flightId": flight_id,
+            "flightName": flight_id,
+            "endRegisterTime": flight.registrationEndTime.isoformat(),
+            "departureTime": flight.departureTime.isoformat(),
+            "startPlantingTime": flight.boardingStartTime.isoformat(),
+            "seatsAircraft": seats_data
+        }
+        
+        # Отправляем запрос
+        response = requests.post(
+            f"{REGISTRATION_SERVICE_URL}/{flight_id}/flights", 
+            json=request_data,
+            timeout=50
+        )
+        
+        if response.status_code >= 400:
+            logger.warning(f"Сервис регистрации вернул код {response.status_code}: {response.text}")
+        else:
+            logger.info(f"Успешно уведомили сервис регистрации о рейсе {flight_id}")
+            
     except Exception as e:
-        logger.error(f"Ошибка при уведомлении регистрации о начале регистрации для рейса {flight_id}: {e}")
+        logger.error(f"Ошибка при уведомлении регистрации о начале регистрации для рейса {flight_id}: {e}", exc_info=True)
 
 
 # Сервисные функции
