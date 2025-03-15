@@ -402,7 +402,7 @@ async def get_tickets(
     }
     
     # Считаем количество мест по классам
-    for seat in aircraft.seats:
+    for seat in aircraft.get("seats", []):
         seat_counts[seat.seat_class] += 1
     
     
@@ -410,7 +410,7 @@ async def get_tickets(
     available_seats = [SeatInfo(
         SeatClass=seat.seat_class,
         SeatCount=seat_counts[seat.seat_class]
-    ) for seat in aircraft.seats ]
+    ) for seat in aircraft.get("seats", []) ]
     
     
     # Получаем информацию о багаже
@@ -467,7 +467,7 @@ async def get_available_flights():
         # Формируем словарь для подсчета количества мест по классам
         class_seats = {}
         
-        for seat in aircraft.seats:
+        for seat in aircraft.get("seats", []):
             seat_class = seat.seat_class.value
             # Преобразуем название класса в формат для клиента
             display_class = seat_class.replace("_", " ").title()  # "premium_economy" -> "Premium Economy"
