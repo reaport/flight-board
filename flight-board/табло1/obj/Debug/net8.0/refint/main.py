@@ -600,6 +600,11 @@ async def get_flight():
             result.append(flight_copy)
     return result
 
+@app.get("/aircraft_id/{flight_id}")
+async def get_aircraft_id(flight_id: str):
+    """Получает ID самолета для конкретного рейса"""
+    return {"aircraftId": aircraft_data[flight_id].aircraftId}
+
 
 
 @app.on_event("startup")
