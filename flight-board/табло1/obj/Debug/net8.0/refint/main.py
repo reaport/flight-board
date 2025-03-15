@@ -218,13 +218,15 @@ def notify_registration_open(flight_id: str):
     logger.info(f"Уведомление о начале регистрации для рейса {flight_id}")
     
     try:
+        # Преобразуем datetime объекты в строки ISO формата для JSON сериализации
+        flight = flights_db[flight_id]
         requests.post(f"{REGISTRATION_SERVICE_URL}/{flight_id}/flights", 
             json={
                 "flightId": flight_id,
                 "flightName": flight_id,
-                "endRegisterTime": flights_db[flight_id].registrationEndTime,
-                "departureTime": flights_db[flight_id].departureTime,
-                "startPlantingTime": flights_db[flight_id].boardingStartTime,
+                "endRegisterTime": flight.registrationEndTime.isoformat(),
+                "departureTime": flight.departureTime.isoformat(),
+                "startPlantingTime": flight.boardingStartTime.isoformat(),
                 "seatsAircraft": [
                     {"seatNumber": seat.seat_number, "seatClass": seat.seat_class.value}
                     for seat in aircraft_data.get(flight_id, {}).seats
