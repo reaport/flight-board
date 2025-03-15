@@ -98,7 +98,7 @@ def notify_aircraft_arrival(flight_id: str):
     logger.info(f"Уведомление о прилете рейса {flight_id}")
     
     try:
-        response = requests.post(f"{AIRCRAFT_SERVICE_URL}{flight_id}/landing",
+        response = requests.post(f"{AIRCRAFT_SERVICE_URL}/{flight_id}/landing",
                                timeout=50)
         
         # В учебном проекте - имитация ответа
@@ -481,7 +481,7 @@ async def get_all_flights():
     return [flight for flight in flights_db.values() if flight.cityFrom == "Мосипск"]
 
 @app.get("/api/arrivalflight/all") # прибытие
-async def get_flight(flight_id: str):
+async def get_flight():
     """Получает информацию о конкретном рейсе"""
     return [flight for flight in flights_db.values() if flight.cityTo == "Мосипск"]
 
