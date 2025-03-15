@@ -245,6 +245,8 @@ def notify_registration_open(flight_id: str):
             "startPlantingTime": flight.boardingStartTime.isoformat(),
             "seatsAircraft": seats_data
         }
+        # Логирование данных запроса
+        logger.info(f"Данные запроса для регистрации рейса {flight_id}: {request_data}")
         
         # Отправляем запрос
         response = requests.post(
