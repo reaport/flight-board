@@ -19,7 +19,6 @@ logger = logging.getLogger("tablo")
 app = FastAPI(title="Табло рейсов аэропорта", version="1.0.0")
 
 # Конфигурация URL сервисов
-# В реальном приложении эти URL должны быть получены из конфигурации
 AIRCRAFT_SERVICE_URL = "https://airplane.reaport.ru"
 ORCHESTRATOR_SERVICE_URL = "https://airport.reaport.ru"
 REGISTRATION_SERVICE_URL = "https://register.reaport.ru"
@@ -143,7 +142,6 @@ def notify_boarding_completed(flight_id: str):
             logger.warning(f"Невозможно завершить посадку для рейса {flight_id}: самолет не назначен")
             return
         
-        # В реальном приложении - отправка запроса к оркестратору
         requests.post(f"{ORCHESTRATOR_SERVICE_URL}/{flight.aircraftId}/boarding/finish", 
                                timeout=50)
         
@@ -167,7 +165,6 @@ def notify_departure(flight_id: str):
             logger.warning(f"Невозможно выполнить вылет для рейса {flight_id}: посадка не завершена")
             return
         
-        # В реальном приложении - отправка запроса к оркестратору
         requests.post(f"{ORCHESTRATOR_SERVICE_URL}/{flight.aircraftId}/takeoff", 
                                timeout=50)
         
