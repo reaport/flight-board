@@ -238,14 +238,15 @@ def notify_registration_open(flight_id: str):
         
         # Формируем данные запроса с правильной сериализацией datetime с суффиксом Z
         # Преобразуем время в UTC, если оно не в UTC
-        end_register_time_utc = flight.registrationEndTime.astimezone(datetime.timezone.utc)
-        departure_time_utc = flight.departureTime.astimezone(datetime.timezone.utc)
-        boarding_start_time_utc = flight.boardingStartTime.astimezone(datetime.timezone.utc)
+        moscow_tz = pytz.timezone('Europe/Moscow')
+        end_register_time_moscow = flight.registrationEndTime.astimezone(moscow_tz)
+        departure_time_moscow = flight.departureTime.astimezone(moscow_tz)
+        boarding_start_time_moscow = flight.boardingStartTime.astimezone(moscow_tz)
         
         # Форматируем в ISO 8601 с суффиксом Z
-        end_register_time_str = end_register_time_utc.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-        departure_time_str = departure_time_utc.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-        boarding_start_time_str = boarding_start_time_utc.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        end_register_time_str = end_register_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        departure_time_str = departure_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        boarding_start_time_str = boarding_start_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
         
         request_data = {
             "flightId": flight_id,
