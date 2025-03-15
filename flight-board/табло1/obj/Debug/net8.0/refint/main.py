@@ -123,6 +123,12 @@ def notify_aircraft_arrival(flight_id: str):
             if departure_id in flights_db:
                 departure_flight = flights_db[departure_id]
                 schedule_departure_events(departure_flight)
+                scheduler.add_job(
+                    notify_registration_open,
+                    trigger=DateTrigger(run_date=departure_flight.registrationStartTime),
+                    args=[departure_id],
+                    id=f"registration_open_{departure_id}"
+                )
     
     except Exception as e:
         logger.error(f"Ошибка при обработке прилета рейса {flight_id}: {e}")
@@ -191,13 +197,6 @@ def schedule_departure_events(flight: FlightDetails):
     open_registration_time = flight.registrationStartTime
     
     logger.info(f"Планирование события завершения посадки для рейса {flight.flightId} на {boarding_end_time}")
-    
-    scheduler.add_job(
-        notify_registration_open,
-        trigger=DateTrigger(run_date=open_registration_time),
-        args=[flight.flightId],
-        id=f"registration_open_{flight.flightId}"
-    )
     
     scheduler.add_job(
         notify_boarding_completed,
