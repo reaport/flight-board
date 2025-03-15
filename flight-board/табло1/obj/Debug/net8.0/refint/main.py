@@ -6,10 +6,7 @@ from typing import List, Dict, Optional
 from pydantic import BaseModel
 import datetime
 import requests
-import json
-import uuid
-import threading
-import time
+import pytz
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.date import DateTrigger
 import logging
