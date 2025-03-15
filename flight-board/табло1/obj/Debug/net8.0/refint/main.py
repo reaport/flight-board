@@ -20,7 +20,7 @@ app = FastAPI(title="Табло рейсов аэропорта", version="1.0.0
 
 # Конфигурация URL сервисов
 AIRCRAFT_SERVICE_URL = "https://airplane.reaport.ru"
-ORCHESTRATOR_SERVICE_URL = "https://airport.reaport.ru"
+ORCHESTRATOR_SERVICE_URL = "https://orchestrator.reaport.ru"
 REGISTRATION_SERVICE_URL = "https://register.reaport.ru"
 # Модели данных
 class SeatClass(str, Enum):
@@ -456,6 +456,16 @@ async def get_tickets(
     # Получаем информацию о багаже
     max_baggage = f"{aircraft.max_baggage_kg} кг"
     
+    moscow_tz = pytz.timezone('Europe/Moscow')
+    departure_time_moscow = flight.departureTime.astimezone(moscow_tz)
+    arival_time_moscow = flight.arrivalTime.astimezone(moscow_tz)
+    registration_start_time_moscow = flight.registrationStartTime.astimezone(moscow_tz)
+    
+    # Форматируем в ISO 8601 с суффиксом Z
+    departure_time_str = departure_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    arival_time_str = arival_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    registration_start_time_str = registration_start_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    
     # Формируем ответ
     response = TicketPurchaseInfoResponse(
         FlightId=flight.flightId,
@@ -464,9 +474,9 @@ async def get_tickets(
         CityTo=flight.cityTo,
         AvailableSeats=available_seats,
         Baggage=max_baggage,
-        TakeoffDateTime=flight.departureTime,
-        LandingDateTime=flight.arrivalTime,
-        RegistrationStartTime=flight.registrationStartTime
+        TakeoffDateTime=departure_time_str,
+        LandingDateTime=arival_time_str,
+        RegistrationStartTime=registration_start_time_str
     )
     
     return response
@@ -526,6 +536,15 @@ async def get_available_flights():
         # Получаем информацию о багаже
         max_baggage = f"{aircraft.max_baggage_kg} кг"
         
+        moscow_tz = pytz.timezone('Europe/Moscow')
+        departure_time_moscow = flight.departureTime.astimezone(moscow_tz)
+        arival_time_moscow = flight.arrivalTime.astimezone(moscow_tz)
+        registration_start_time_moscow = flight.registrationStartTime.astimezone(moscow_tz)
+        # Форматируем в ISO 8601 с суффиксом Z
+        departure_time_str = departure_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        arival_time_str = arival_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        registration_start_time_str = registration_start_time_moscow.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        
         # Формируем ответ для текущего рейса
         flight_info = TicketPurchaseInfoResponse(
             FlightId=flight.flightId,
@@ -534,9 +553,9 @@ async def get_available_flights():
             CityTo=flight.cityTo,
             AvailableSeats=available_seats,
             Baggage=max_baggage,
-            TakeoffDateTime=flight.departureTime,
-            LandingDateTime=flight.arrivalTime,
-            RegistrationStartTime=flight.registrationStartTime
+            TakeoffDateTime=departure_time_str,
+            LandingDateTime=arival_time_str,
+            RegistrationStartTime=registration_start_time_str
         )
         
         result.append(flight_info)
