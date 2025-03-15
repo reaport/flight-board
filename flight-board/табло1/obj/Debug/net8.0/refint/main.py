@@ -251,7 +251,7 @@ def notify_registration_open(flight_id: str):
         
         # Отправляем запрос
         response = requests.post(
-            f"{REGISTRATION_SERVICE_URL}/{flight_id}/flights", 
+            f"{REGISTRATION_SERVICE_URL}/flights", 
             json=request_data,
             timeout=50
         )
