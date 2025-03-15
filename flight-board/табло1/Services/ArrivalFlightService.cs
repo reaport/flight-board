@@ -1,25 +1,28 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Linq;
 
 namespace AirportManagement.Services
 {
     public class ArrivalFlightService
     {
-        private readonly ConcurrentDictionary<string, ArrivalFlight> _arrivalFlights = new ConcurrentDictionary<string, ArrivalFlight>();
+        private readonly ConcurrentDictionary<string, ArrivalFlight> _arrivalFlights = new();
         private readonly IConfiguration _config;
         private readonly ILogger<ArrivalFlight> _logger;
-        private readonly AircraftModuleService _aircraftModuleService; // Добавляем AircraftModuleService
+        private readonly AircraftModuleService _aircraftModuleService;
 
         public ArrivalFlightService(
             IConfiguration config,
             ILogger<ArrivalFlight> logger,
-            AircraftModuleService aircraftModuleService) // Добавляем AircraftModuleService
+            AircraftModuleService aircraftModuleService)
         {
-            _config = config;
-            _logger = logger;
-            _aircraftModuleService = aircraftModuleService;
+            _config = config ?? throw new ArgumentNullException(nameof(config));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _aircraftModuleService = aircraftModuleService ?? throw new ArgumentNullException(nameof(aircraftModuleService));
         }
 
         public ArrivalFlight CreateArrivalFlight(string departureCity, int arrivalTimeOffset)
@@ -35,7 +38,7 @@ namespace AirportManagement.Services
                 _logger,
                 _config,
                 arrivalTime,
-                _aircraftModuleService // Передаем AircraftModuleService
+                _aircraftModuleService
             );
 
             if (!_arrivalFlights.TryAdd(arrivalFlight.FlightId, arrivalFlight))
@@ -63,6 +66,33 @@ namespace AirportManagement.Services
         public List<ArrivalFlight> GetAllArrivalFlights()
         {
             return _arrivalFlights.Values.ToList();
+        }
+
+        public async Task ProcessLandingAsync(string flightId)
+        {
+            if (string.IsNullOrEmpty(flightId))
+            {
+                throw new ArgumentException("Идентификатор рейса не может быть пустым.", nameof(flightId));
+            }
+
+            if (!_arrivalFlights.TryGetValue(flightId, out var arrivalFlight))
+            {
+                _logger.LogWarning($"Рейс с ID {flightId} не найден.");
+                throw new InvalidOperationException($"Рейс с ID {flightId} не найден.");
+            }
+
+            try
+            {
+                // Получаем AircraftId при приземлении
+                var aircraftId = await _aircraftModuleService.NotifyLandingAsync(flightId);
+                arrivalFlight.SetAircraftId(aircraftId); // Устанавливаем AircraftId
+                _logger.LogInformation($"Самолет {aircraftId} приземлился для рейса {flightId}.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Ошибка при обработке приземления рейса {flightId}.");
+                throw;
+            }
         }
     }
 }

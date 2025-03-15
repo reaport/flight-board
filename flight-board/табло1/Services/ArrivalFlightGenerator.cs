@@ -3,7 +3,6 @@ using System.Timers;
 using Timer = System.Timers.Timer;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirportManagement.Services;
 
@@ -15,7 +14,7 @@ namespace AirportManagement
         private Timer _timer;
         private readonly ILogger<ArrivalFlight> _logger;
         private readonly IConfiguration _config;
-        private readonly AircraftModuleService _aircraftModuleService; // Добавляем AircraftModuleService
+        private readonly AircraftModuleService _aircraftModuleService;
 
         public string FlightId { get; } // Уникальный идентификатор рейса
         public string AircraftData { get; set; }
@@ -23,13 +22,14 @@ namespace AirportManagement
         public string ArrivalCity { get; } = "Мосипск"; // Город прилета (всегда Мосипск)
         public DateTime ArrivalTime { get; set; } // Время прилета
         public bool HasLanded { get; private set; } // Флаг, указывающий, что самолет приземлился
+        public string AircraftId { get; private set; } // Сохраняем AircraftId
 
         public ArrivalFlight(
             string departureCity,
             ILogger<ArrivalFlight> logger,
             IConfiguration config,
             DateTime arrivalTime,
-            AircraftModuleService aircraftModuleService) // Добавляем AircraftModuleService
+            AircraftModuleService aircraftModuleService)
         {
             if (string.IsNullOrEmpty(departureCity))
             {
@@ -75,22 +75,37 @@ namespace AirportManagement
             }
         }
 
+        private bool _isLandingRequestSent = false;
+
         public async Task LandAsync()
         {
-            HasLanded = true;
-            _logger.LogInformation($"Рейс {FlightId} приземлился в {ArrivalCity}.");
-            _timer.Stop(); // Останавливаем таймер
+            if (_isLandingRequestSent)
+            {
+                _logger.LogWarning($"Запрос на приземление для рейса {FlightId} уже отправлен.");
+                return;
+            }
 
             try
             {
-                // Уведомляем модуль самолета о прилете
+                _isLandingRequestSent = true;
                 var aircraftId = await _aircraftModuleService.NotifyLandingAsync(FlightId);
-                _logger.LogInformation($"Уведомление о прилете для рейса {FlightId} отправлено успешно. ID самолета: {aircraftId}");
+                AircraftId = aircraftId; // Сохраняем AircraftId
+                _logger.LogInformation($"Рейс {FlightId} приземлился. AircraftId: {aircraftId}");
+
+                // Останавливаем таймер после успешного приземления
+                _timer.Stop();
+                _logger.LogInformation($"Таймер для рейса {FlightId} остановлен.");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Ошибка при отправке уведомления о прилете для рейса {FlightId}.");
+                throw;
             }
+        }
+
+        public void SetAircraftId(string aircraftId)
+        {
+            AircraftId = aircraftId; // Устанавливаем AircraftId
         }
 
         public void Dispose()

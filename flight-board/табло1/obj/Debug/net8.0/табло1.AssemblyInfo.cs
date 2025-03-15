@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("табло1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c003ef12cad1f615aa3a2ede52129fee579d0b65")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0832f7fa304a36dd93c7a0fa9921b7c92bf843f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("табло1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("табло1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

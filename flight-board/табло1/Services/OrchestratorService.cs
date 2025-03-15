@@ -7,6 +7,8 @@
     {
         _httpClient = httpClient;
         _logger = logger;
+
+        _httpClient.BaseAddress = new Uri("https://orchestrator.reaport.ru");
     }
 
     // Метод для уведомления о завершении посадки
