@@ -1,3 +1,4 @@
+import copy
 from enum import Enum
 from fastapi import FastAPI, HTTPException
 import uvicorn
@@ -24,7 +25,7 @@ app = FastAPI(title="Табло рейсов аэропорта", version="1.0.0
 # В реальном приложении эти URL должны быть получены из конфигурации
 AIRCRAFT_SERVICE_URL = "https://airplane.reaport.ru"
 ORCHESTRATOR_SERVICE_URL = "https://airport.reaport.ru"
-
+REGISTRATION_SERVICE_URL = "https://registration.reaport.ru"
 # Модели данных
 class SeatClass(str, Enum):
     FIRST = "first"
@@ -190,8 +191,17 @@ def schedule_departure_events(flight: FlightDetails):
     """Запланировать события для рейса на вылет (завершение посадки и вылет)"""
     boarding_end_time = flight.boardingEndTime
     departure_time = flight.departureTime
+    open_registration_time = flight.registrationStartTime
     
     logger.info(f"Планирование события завершения посадки для рейса {flight.flightId} на {boarding_end_time}")
+    
+    scheduler.add_job(
+        notify_registration_open,
+        trigger=DateTrigger(run_date=open_registration_time),
+        args=[flight.flightId],
+        id=f"registration_open_{flight.flightId}"
+    )
+    
     scheduler.add_job(
         notify_boarding_completed,
         trigger=DateTrigger(run_date=boarding_end_time),
@@ -206,6 +216,27 @@ def schedule_departure_events(flight: FlightDetails):
         args=[flight.flightId],
         id=f"departure_{flight.flightId}"
     )
+    
+def notify_registration_open(flight_id: str):
+    """Уведомить регистрацию о начале регистрации"""
+    logger.info(f"Уведомление о начале регистрации для рейса {flight_id}")
+    
+    try:
+        requests.post(f"{REGISTRATION_SERVICE_URL}/{flight_id}/flights", 
+            json={
+                "flightId": flight_id,
+                "flightName": flight_id,
+                "endRegisterTime": flights_db[flight_id].registrationEndTime,
+                "departureTime": flights_db[flight_id].departureTime,
+                "startPlantingTime": flights_db[flight_id].boardingStartTime,
+                "seatsAircraft": [
+                    {"seatNumber": seat.seat_number, "seatClass": seat.seat_class.value}
+                    for seat in aircraft_data.get(flight_id, {}).seats
+                ] if flight_id in aircraft_data else []
+            })
+    except Exception as e:
+        logger.error(f"Ошибка при уведомлении регистрации о начале регистрации для рейса {flight_id}: {e}")
+
 
 # Сервисные функции
 def generate_flight_pair(cityFrom: str, cityTo: str):
@@ -478,12 +509,42 @@ async def get_available_flights():
 @app.get("/api/flight/all") # отправление
 async def get_all_flights():
     """Получает список всех рейсов"""
-    return [flight for flight in flights_db.values() if flight.cityFrom == "Мосипск"]
+    result = []
+    moscow_tz = pytz.timezone('Europe/Moscow')
+    
+    for flight in flights_db.values():
+        if flight.cityFrom == "Мосипск":
+            # Конвертируем все времена в московский часовой пояс
+            flight_copy = copy.deepcopy(flight)
+            if flight_copy.departureTime:
+                flight_copy.departureTime = flight_copy.departureTime.astimezone(moscow_tz)
+            if flight_copy.arrivalTime:
+                flight_copy.arrivalTime = flight_copy.arrivalTime.astimezone(moscow_tz)
+            if flight_copy.registrationStartTime:
+                flight_copy.registrationStartTime = flight_copy.registrationStartTime.astimezone(moscow_tz)
+            result.append(flight_copy)
+    return result
 
 @app.get("/api/arrivalflight/all") # прибытие
 async def get_flight():
     """Получает информацию о конкретном рейсе"""
-    return [flight for flight in flights_db.values() if flight.cityTo == "Мосипск"]
+    result = []
+    moscow_tz = pytz.timezone('Europe/Moscow')
+    
+    for flight in flights_db.values():
+        if flight.cityTo == "Мосипск":
+            # Конвертируем все времена в московский часовой пояс
+            flight_copy = copy.deepcopy(flight)
+            if flight_copy.departureTime:
+                flight_copy.departureTime = flight_copy.departureTime.astimezone(moscow_tz)
+            if flight_copy.arrivalTime:
+                flight_copy.arrivalTime = flight_copy.arrivalTime.astimezone(moscow_tz)
+            if flight_copy.registrationStartTime:
+                flight_copy.registrationStartTime = flight_copy.registrationStartTime.astimezone(moscow_tz)
+            result.append(flight_copy)
+    return result
+
+
 
 @app.on_event("startup")
 def startup_event():
