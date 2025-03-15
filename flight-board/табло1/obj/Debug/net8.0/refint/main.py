@@ -303,7 +303,7 @@ def generate_flight_pair(cityFrom: str, cityTo: str):
                                           timeout=50)
         
         # Сохраняем данные о самолете
-        aircraft_data[arrival_id] = aircraft_response.json()
+        aircraft_data[arrival_id] = GenerateResponse(**aircraft_response.json())
         
         # Планируем событие прилета
         schedule_arrival_event(arrival_flight)
@@ -402,7 +402,7 @@ async def get_tickets(
     }
     
     # Считаем количество мест по классам
-    for seat in aircraft.get("seats", []):
+    for seat in aircraft.seats:
         seat_counts[seat.seat_class] += 1
     
     
@@ -410,7 +410,7 @@ async def get_tickets(
     available_seats = [SeatInfo(
         SeatClass=seat.seat_class,
         SeatCount=seat_counts[seat.seat_class]
-    ) for seat in aircraft.get("seats", []) ]
+    ) for seat in aircraft.seats ]
     
     
     # Получаем информацию о багаже
@@ -467,7 +467,7 @@ async def get_available_flights():
         # Формируем словарь для подсчета количества мест по классам
         class_seats = {}
         
-        for seat in aircraft.get("seats", []):
+        for seat in aircraft.seats:
             seat_class = seat.seat_class.value
             # Преобразуем название класса в формат для клиента
             display_class = seat_class.replace("_", " ").title()  # "premium_economy" -> "Premium Economy"
