@@ -22,7 +22,7 @@ app = FastAPI(title="Табло рейсов аэропорта", version="1.0.0
 # В реальном приложении эти URL должны быть получены из конфигурации
 AIRCRAFT_SERVICE_URL = "https://airplane.reaport.ru"
 ORCHESTRATOR_SERVICE_URL = "https://airport.reaport.ru"
-REGISTRATION_SERVICE_URL = "https://registration.reaport.ru"
+REGISTRATION_SERVICE_URL = "https://register.reaport.ru"
 # Модели данных
 class SeatClass(str, Enum):
     FIRST = "first"
