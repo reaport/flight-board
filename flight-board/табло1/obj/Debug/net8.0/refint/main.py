@@ -100,7 +100,7 @@ def notify_aircraft_arrival(flight_id: str):
                                timeout=50)
         
         # В учебном проекте - имитация ответа
-        aircraft_id = response.json()["aircraftId"]
+        aircraft_id = response.json()["aircraft_id"]
         
         # Обновление информации о рейсе
         flight = flights_db[flight_id]
