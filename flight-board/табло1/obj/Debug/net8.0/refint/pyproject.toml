@@ -1,0 +1,13 @@
+[project]
+name = "tablo"
+version = "0.1.0"
+description = "Сервис табло рейсов для аэропорта"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.4.2",
+    "requests>=2.31.0",
+    "apscheduler>=3.10.0",
+]
