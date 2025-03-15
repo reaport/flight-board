@@ -236,13 +236,23 @@ def notify_registration_open(flight_id: str):
                     "seatClass": seat.seat_class.value
                 })
         
-        # Формируем данные запроса с правильной сериализацией datetime
+        # Формируем данные запроса с правильной сериализацией datetime с суффиксом Z
+        # Преобразуем время в UTC, если оно не в UTC
+        end_register_time_utc = flight.registrationEndTime.astimezone(datetime.timezone.utc)
+        departure_time_utc = flight.departureTime.astimezone(datetime.timezone.utc)
+        boarding_start_time_utc = flight.boardingStartTime.astimezone(datetime.timezone.utc)
+        
+        # Форматируем в ISO 8601 с суффиксом Z
+        end_register_time_str = end_register_time_utc.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        departure_time_str = departure_time_utc.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        boarding_start_time_str = boarding_start_time_utc.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        
         request_data = {
             "flightId": flight_id,
             "flightName": flight_id,
-            "endRegisterTime": flight.registrationEndTime.isoformat(),
-            "departureTime": flight.departureTime.isoformat(),
-            "startPlantingTime": flight.boardingStartTime.isoformat(),
+            "endRegisterTime": end_register_time_str,
+            "departureTime": departure_time_str,
+            "startPlantingTime": boarding_start_time_str,
             "seatsAircraft": seats_data
         }
         # Логирование данных запроса
