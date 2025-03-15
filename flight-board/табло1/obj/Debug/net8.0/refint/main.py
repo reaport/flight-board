@@ -603,7 +603,29 @@ async def get_flight():
 @app.get("/aircraft_id/{flight_id}")
 async def get_aircraft_id(flight_id: str):
     """Получает ID самолета для конкретного рейса"""
-    return {"aircraftId": aircraft_data[flight_id].aircraftId}
+    # Проверяем, есть ли рейс в базе данных
+    if flight_id not in flights_db:
+        raise HTTPException(status_code=404, detail=f"Рейс {flight_id} не найден")
+    
+    flight = flights_db[flight_id]
+    
+    # Если это рейс на вылет из Мосипска, ищем связанный рейс на прилет
+    if flight.cityFrom == "Мосипск":
+        arrival_flight_id = None
+        for arrival_id, departure_id in arrival_departure_pairs.items():
+            if departure_id == flight_id:
+                arrival_flight_id = arrival_id
+                break
+        
+        if arrival_flight_id and arrival_flight_id in aircraft_data:
+            return {"aircraftId": aircraft_data[arrival_flight_id].aircraftId}
+    
+    # Если это рейс на прилет или не нашли связанный рейс
+    if flight_id in aircraft_data:
+        return {"aircraftId": aircraft_data[flight_id].aircraftId}
+    
+    # Если самолет не найден
+    raise HTTPException(status_code=404, detail=f"Самолет для рейса {flight_id} не найден")
 
 
 
