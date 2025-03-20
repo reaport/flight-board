@@ -289,7 +289,7 @@ def generate_flight_pair(cityFrom: str, cityTo: str):
     # Время прилета: текущее время + 2 минуты
     arrival_time = now + datetime.timedelta(minutes=1)
     # Время вылета: время прилета + 10 минут
-    departure_time = arrival_time + datetime.timedelta(minutes=5)
+    departure_time = now + datetime.timedelta(minutes=5)
     
     # Создание рейса на прилет
     arrival_flight = FlightDetails(
