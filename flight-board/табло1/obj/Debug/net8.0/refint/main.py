@@ -142,7 +142,7 @@ def notify_boarding_completed(flight_id: str):
             logger.warning(f"Невозможно завершить посадку для рейса {flight_id}: самолет не назначен")
             return
         
-        requests.post(f"{ORCHESTRATOR_SERVICE_URL}/{flight.aircraftId}/boarding/finish", 
+        requests.post(f"{ORCHESTRATOR_SERVICE_URL}/ad_board/{flight.aircraftId}/boarding/finish", 
                                timeout=50)
         
         flight.isBoardingClosed = True
@@ -165,7 +165,7 @@ def notify_departure(flight_id: str):
             logger.warning(f"Невозможно выполнить вылет для рейса {flight_id}: посадка не завершена")
             return
         
-        requests.post(f"{ORCHESTRATOR_SERVICE_URL}/{flight.aircraftId}/takeoff", 
+        requests.post(f"{ORCHESTRATOR_SERVICE_URL}/ad_board/{flight.aircraftId}/takeoff", 
                                timeout=50)
         
         logger.info(f"Рейс {flight_id} вылетел. Самолет {flight.aircraftId}")
