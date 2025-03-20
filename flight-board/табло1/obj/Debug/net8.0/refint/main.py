@@ -325,7 +325,7 @@ def generate_flight_pair(cityFrom: str, cityTo: str):
         registrationEndTime=now + datetime.timedelta(minutes=3),
         boardingStartTime=now + datetime.timedelta(minutes=3),
         boardingEndTime=now + datetime.timedelta(minutes=5),
-        departureTime=departure_time,
+        departureTime=departure_time + datetime.timedelta(seconds=20),
         isBoardingClosed=False,
         isRegistrationClosed=False,
         isTicketSalesClosed=False
