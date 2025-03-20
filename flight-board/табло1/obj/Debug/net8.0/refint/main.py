@@ -266,6 +266,8 @@ def notify_registration_open(flight_id: str):
             timeout=50
         )
         
+        flight.isTicketSalesClosed = True
+        
         if response.status_code >= 400:
             logger.warning(f"Сервис регистрации вернул код {response.status_code}: {response.text}")
         else:
