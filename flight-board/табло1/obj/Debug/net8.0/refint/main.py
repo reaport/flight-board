@@ -289,7 +289,7 @@ def generate_flight_pair(cityFrom: str, cityTo: str):
     # Время прилета: текущее время + 2 минуты
     arrival_time = now + datetime.timedelta(minutes=1)
     # Время вылета: время прилета + 10 минут
-    departure_time = now + datetime.timedelta(minutes=5)
+    departure_time = now + datetime.timedelta(minutes=8)
     
     # Создание рейса на прилет
     arrival_flight = FlightDetails(
@@ -321,10 +321,10 @@ def generate_flight_pair(cityFrom: str, cityTo: str):
         cityFrom="Мосипск",
         cityTo=cityTo,
         ticketSalesStart=now,
-        registrationStartTime=now + datetime.timedelta(minutes=1),
-        registrationEndTime=now + datetime.timedelta(minutes=3),
-        boardingStartTime=now + datetime.timedelta(minutes=3),
-        boardingEndTime=now + datetime.timedelta(minutes=5),
+        registrationStartTime=now + datetime.timedelta(minutes=3),
+        registrationEndTime=now + datetime.timedelta(minutes=5),
+        boardingStartTime=now + datetime.timedelta(minutes=5),
+        boardingEndTime=now + datetime.timedelta(minutes=7),
         departureTime=departure_time + datetime.timedelta(seconds=20),
         isBoardingClosed=False,
         isRegistrationClosed=False,
