@@ -1,5 +1,6 @@
 # flight-board
-Табло - это модуль генерации рейсов, отвечающий за время рейсов.
+Табло - это модуль генерации рейсов, отвечающий за время рейсов
+
 ## Полезные ссылки
 - [Swagger UI](https://docs.reaport.ru/?urls.primaryName=flight-board#/)
 - [Контракт](https://github.com/reaport/docs/blob/main/openAPI/flight-board.yaml)
